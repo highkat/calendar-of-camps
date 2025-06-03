@@ -1,3 +1,6 @@
+
+"use client"; // Add this for useState and useRouter
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,6 +9,8 @@ import { Search, CalendarDays, BellRing, MapPin, Users, Award } from 'lucide-rea
 import Image from 'next/image';
 import { CampCard } from '@/components/camps/CampCard';
 import type { CampSession } from '@/lib/mockdata';
+import { useState, FormEvent } from 'react'; // Import useState and FormEvent
+import { useRouter } from 'next/navigation'; // Import useRouter
 
 const mockFeaturedCamps: CampSession[] = [
   { id: '1', name: 'Forest Explorers Weekly', campName: 'Camp Wildwood', description: 'Discover nature, build forts, and learn outdoor skills.', theme: 'Nature', ageRange: '6-10', dates: 'July 10-14', cost: '$350', imageUrl: 'https://placehold.co/600x400.png', location: 'Redwood National Park', dataAiHint: 'forest kids' },
@@ -15,12 +20,24 @@ const mockFeaturedCamps: CampSession[] = [
 
 
 export default function HomePage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+
+  const handleSearchSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      router.push('/search');
+    }
+  };
+
   return (
     <div className="flex flex-col ">
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary to-accent text-primary-foreground">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-20" 
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: "url('https://placehold.co/1920x1080.png')", backgroundBlendMode: "multiply" }}
           data-ai-hint="summer camp fun"
         ></div>
@@ -31,11 +48,13 @@ export default function HomePage() {
           <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
             Discover, schedule, and manage summer camps with ease. Calendar of Camps helps busy parents find the perfect fit for their kids.
           </p>
-          <form className="max-w-xl mx-auto flex flex-col sm:flex-row gap-3">
+          <form onSubmit={handleSearchSubmit} className="max-w-xl mx-auto flex flex-col sm:flex-row gap-3">
             <Input
               type="text"
               placeholder="Enter address, city, or zip code"
               className="flex-grow text-lg p-4 bg-background/90 text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-background"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <Button type="submit" size="lg" className="text-lg bg-background text-primary hover:bg-background/90">
               <Search className="mr-2 h-5 w-5" />
