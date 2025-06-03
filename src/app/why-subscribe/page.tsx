@@ -22,7 +22,7 @@ export default function WhySubscribePage() {
             { icon: Bot, title: "AI-Powered Recommendations", description: "Get personalized camp suggestions based on your family's preferences and search history." },
             { icon: Users, title: "Detailed Camp Profiles", description: "Access in-depth information, photos, and parent reviews for each camp." },
             { icon: Percent, title: "Crowdsource Discounts", description: "Submit new camps and earn exclusive discount codes for your subscription renewal." },
-            { icon: CheckCircle, title: "Priority Support", description: "Receive faster assistance from our dedicated support team." },
+            // { icon: CheckCircle, title: "Priority Support", description: "Receive faster assistance from our dedicated support team." }, // Removed Priority Support
           ].map((feature, index) => (
             <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader className="items-center text-center">
@@ -59,7 +59,7 @@ export default function WhySubscribePage() {
                 <Button size="lg" variant="secondary" asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
                   <Link href="/signup?plan=premium_1y">Subscribe Yearly</Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild className="text-primary-foreground border-primary-foreground/50 hover:bg-primary-foreground/10">
+                <Button size="lg" variant="secondary" asChild>
                   <Link href="/signup?plan=premium_3y">Subscribe for 3 Years (Best Value)</Link>
                 </Button>
               </div>
