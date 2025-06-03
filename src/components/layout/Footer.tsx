@@ -13,7 +13,7 @@ export default function Footer() {
           <div className="space-y-3">
             <Logo />
             <p className="text-sm text-muted-foreground">
-              Your compass for navigating summer camp adventures.
+              Camp planning, solved.
             </p>
           </div>
           <div className="space-y-3">
