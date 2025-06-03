@@ -144,6 +144,7 @@ export default function SearchPage() {
               <ChevronUpLucide className={`${open ? 'transform rotate-180' : ''} w-5 h-5 text-primary`} />
             </Disclosure.Button>
             <Transition
+                show={open}
                 enter="transition duration-100 ease-out"
                 enterFrom="transform scale-95 opacity-0"
                 enterTo="transform scale-100 opacity-100"
@@ -151,7 +152,7 @@ export default function SearchPage() {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-              <Disclosure.Panel className="mb-8 p-6 bg-card rounded-lg shadow-md">
+              <Disclosure.Panel static className="mb-8 p-6 bg-card rounded-lg shadow-md">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div>
                     <Label htmlFor="theme-filter" className="font-semibold mb-1 block"><Tag className="inline mr-1 h-4 w-4"/>Theme</Label>
@@ -272,3 +273,4 @@ export default function SearchPage() {
     </div>
   );
 }
+
