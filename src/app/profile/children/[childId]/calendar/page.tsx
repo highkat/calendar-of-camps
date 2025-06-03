@@ -1,4 +1,6 @@
+
 "use client";
+import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CalendarDays, ArrowLeft, PlusCircle } from 'lucide-react';
@@ -22,14 +24,17 @@ export default function ChildCalendarPage() {
   // For now, using mock data
   const childName = childId === "child1" ? "Alex Johnson" : childId === "child2" ? "Jamie Lee" : "Child";
 
-  if (authLoading) {
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [isAuthenticated, authLoading, router]);
+
+  if (authLoading || !isAuthenticated) {
+    // Return loading state or null while redirecting
     return <div className="container py-12 text-center">Loading...</div>;
   }
 
-  if (!isAuthenticated) {
-    router.push('/login');
-    return null;
-  }
 
   return (
     <div className="container py-12">
