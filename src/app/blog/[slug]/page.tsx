@@ -12,7 +12,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   // Mock data for a single post - replace with actual data fetching
   const post = {
     title: `Understanding ${slug.replace(/-/g, ' ')}`,
-    author: 'CampCompass Team',
+    author: 'Calendar of Camps Team',
     date: 'July 1, 2024',
     imageUrl: 'https://placehold.co/1200x600.png',
     dataAiHint: 'article illustration',

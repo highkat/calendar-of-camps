@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     default: APP_NAME,
     template: `%s | ${APP_NAME}`,
   },
-  description: 'Find and schedule summer camps for your kids with CampCompass.',
+  description: 'Find and schedule summer camps for your kids with Calendar of Camps.',
 };
 
 export default function RootLayout({

@@ -39,7 +39,7 @@ export default function BlogPage() {
   return (
     <div className="container py-12">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">CampCompass Blog</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Calendar of Camps Blog</h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Tips, guides, and inspiration for planning the best summer ever.
         </p>

@@ -7,7 +7,7 @@ export default function AboutPage() {
       <div className="container">
         {/* Hero Section */}
         <section className="text-center mb-16 md:mb-24">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">About CampCompass</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">About Calendar of Camps</h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             We&apos;re passionate about connecting families with enriching summer experiences. Learn more about our mission, vision, and the team dedicated to making summer planning easier for busy parents.
           </p>
@@ -50,7 +50,7 @@ export default function AboutPage() {
             <div className="relative aspect-square">
               <Image
                 src="https://placehold.co/600x600.png"
-                alt="CampCompass team working"
+                alt="Calendar of Camps team working"
                 layout="fill"
                 objectFit="cover"
                 className="rounded-xl shadow-xl"
@@ -60,7 +60,7 @@ export default function AboutPage() {
             <div>
               <h2 className="text-3xl font-bold text-primary mb-6">Our Story</h2>
               <p className="text-lg text-muted-foreground mb-4">
-                CampCompass was born from the real-life challenges faced by working parents. We understood the struggle of sifting through countless websites, managing complex schedules, and the fear of missing out on great camp opportunities.
+                Calendar of Camps was born from the real-life challenges faced by working parents. We understood the struggle of sifting through countless websites, managing complex schedules, and the fear of missing out on great camp opportunities.
               </p>
               <p className="text-lg text-muted-foreground mb-4">
                 Driven by a desire to make this process stress-free and even enjoyable, we created a centralized platform that aggregates camp information, provides smart scheduling tools, and fosters a supportive community.
@@ -76,7 +76,7 @@ export default function AboutPage() {
         <section className="text-center">
           <h2 className="text-3xl font-bold text-primary mb-6">Join Our Community</h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Whether you&apos;re a parent looking for camps or a camp organizer wanting to share your program, CampCompass is here for you.
+            Whether you&apos;re a parent looking for camps or a camp organizer wanting to share your program, Calendar of Camps is here for you.
           </p>
           {/* You can add buttons here, e.g., to search camps or submit a camp */}
         </section>

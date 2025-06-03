@@ -9,9 +9,9 @@ export default function WhySubscribePage() {
     <div className="bg-gradient-to-b from-background to-muted/30 py-12 md:py-20">
       <div className="container">
         <div className="text-center mb-12 md:mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary">Unlock the Best of CampCompass</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary">Unlock the Best of Calendar of Camps</h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Supercharge your summer camp search and planning with a CampCompass premium subscription. Discover why parents love our exclusive features.
+            Supercharge your summer camp search and planning with a Calendar of Camps premium subscription. Discover why parents love our exclusive features.
           </p>
         </div>
 

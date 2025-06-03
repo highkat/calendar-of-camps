@@ -1,4 +1,4 @@
-export const APP_NAME = "CampCompass";
+export const APP_NAME = "Calendar of Camps";
 
 export const NAV_LINKS = [
   { href: "/", label: "Home" },

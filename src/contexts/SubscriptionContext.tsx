@@ -25,14 +25,14 @@ export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {
     setIsSubscribed(subscribed);
     setSubscriptionTier(tier);
     if (typeof window !== 'undefined') {
-      localStorage.setItem('campcompass_subscription', JSON.stringify({ subscribed, tier }));
+      localStorage.setItem('calendarofcamps_subscription', JSON.stringify({ subscribed, tier }));
     }
   }, []);
   
   const checkSubscriptionStatus = useCallback(() => {
     setLoading(true);
     if (typeof window !== 'undefined') {
-      const storedSubscription = localStorage.getItem('campcompass_subscription');
+      const storedSubscription = localStorage.getItem('calendarofcamps_subscription');
       if (storedSubscription) {
         try {
           const { subscribed, tier } = JSON.parse(storedSubscription);

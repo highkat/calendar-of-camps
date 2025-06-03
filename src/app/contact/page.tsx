@@ -117,7 +117,7 @@ export default function ContactPage() {
       <div className="text-center mt-12 md:mt-16">
         <h3 className="text-xl font-semibold text-primary mb-2">Other Ways to Reach Us</h3>
         <p className="text-muted-foreground">
-          Email: <a href="mailto:support@campcompass.com" className="text-accent hover:underline">support@campcompass.com</a>
+          Email: <a href="mailto:support@calendarofcamps.com" className="text-accent hover:underline">support@calendarofcamps.com</a>
         </p>
         {/* Add social media links or phone number if applicable */}
       </div>

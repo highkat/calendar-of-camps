@@ -10,7 +10,7 @@ export default function AdvertisePage() {
       <div className="container">
         {/* Hero Section */}
         <section className="text-center mb-16 md:mb-24">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">Advertise with CampCompass</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">Advertise with Calendar of Camps</h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             Reach thousands of engaged parents actively searching for summer camps. Boost your camp&apos;s visibility and enrollment with our targeted advertising solutions.
           </p>
@@ -82,7 +82,7 @@ export default function AdvertisePage() {
           <div className="container max-w-3xl">
             <h2 className="text-3xl font-bold text-primary mb-6">Ready to Grow Your Camp?</h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Let&apos;s discuss how CampCompass can help you achieve your enrollment goals. Contact our advertising team today for a personalized consultation and media kit.
+              Let&apos;s discuss how Calendar of Camps can help you achieve your enrollment goals. Contact our advertising team today for a personalized consultation and media kit.
             </p>
             <Button size="lg" asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
               <Link href="/contact?subject=AdvertisingInquiry">Contact Advertising Sales</Link>

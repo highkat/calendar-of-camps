@@ -64,7 +64,7 @@ export default function StorePage() {
     <div className="container py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4 flex items-center justify-center">
-          <ShoppingBag className="mr-3 h-10 w-10" /> CampCompass Store
+          <ShoppingBag className="mr-3 h-10 w-10" /> Calendar of Camps Store
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Handpicked essentials and fun gear for your child&apos;s summer camp adventure! These are affiliate links, meaning we may earn a small commission if you purchase through them, at no extra cost to you.
@@ -106,9 +106,13 @@ export default function StorePage() {
         ))}
       </div>
        <p className="text-center mt-12 text-sm text-muted-foreground">
-        Please note: CampCompass does not directly sell these products. All purchases are made through external affiliate partner websites.
+        Please note: Calendar of Camps does not directly sell these products. All purchases are made through external affiliate partner websites.
         Prices and availability are subject to change on the partner&apos;s site.
       </p>
     </div>
   );
 }
+
+// Ensure Badge component is correctly imported or defined if it's custom.
+// Assuming Badge is from '@/components/ui/badge' and correctly styled.
+import { Badge } from '@/components/ui/badge';

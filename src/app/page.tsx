@@ -29,7 +29,7 @@ export default function HomePage() {
             Find Your Child&apos;s Next Adventure
           </h1>
           <p className="text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-            Discover, schedule, and manage summer camps with ease. CampCompass helps busy parents find the perfect fit for their kids.
+            Discover, schedule, and manage summer camps with ease. Calendar of Camps helps busy parents find the perfect fit for their kids.
           </p>
           <form className="max-w-xl mx-auto flex flex-col sm:flex-row gap-3">
             <Input
@@ -51,7 +51,7 @@ export default function HomePage() {
       {/* How It Works Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-primary">How CampCompass Works</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-primary">How Calendar of Camps Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
               <CardHeader className="items-center text-center">
@@ -128,7 +128,7 @@ export default function HomePage() {
               />
             </div>
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">Unlock the Full CampCompass Experience</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary">Unlock the Full Calendar of Camps Experience</h2>
               <p className="text-lg text-muted-foreground mb-6">
                 Our premium subscription gives you unlimited access to all camp listings, advanced search filters, personalized recommendations, and exclusive content.
               </p>

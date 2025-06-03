@@ -51,7 +51,7 @@ export default function SignupPage() {
     };
     
     login(mockUser); // Automatically log in the user after signup
-    toast({ title: "Signup Successful!", description: `Welcome to CampCompass, ${name}!` });
+    toast({ title: "Signup Successful!", description: `Welcome to Calendar of Camps, ${name}!` });
 
     if (plan) {
       // Redirect to a payment page or a plan confirmation page
@@ -69,7 +69,7 @@ export default function SignupPage() {
         <CardHeader className="text-center">
           <UserPlus className="mx-auto h-12 w-12 text-primary mb-4" />
           <CardTitle className="text-3xl font-bold">Create Your Account</CardTitle>
-          <CardDescription>Join CampCompass and start planning your perfect summer!</CardDescription>
+          <CardDescription>Join Calendar of Camps and start planning your perfect summer!</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-6">

@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function TermsPage() {
   return (
     <div className="container py-12 max-w-3xl mx-auto">
@@ -5,7 +7,7 @@ export default function TermsPage() {
       <div className="prose prose-lg max-w-none text-foreground prose-headings:text-primary prose-headings:font-headline">
         <p>Last Updated: {new Date().toLocaleDateString()}</p>
 
-        <p>Welcome to CampCompass! These Terms of Service ("Terms") govern your use of the CampCompass website and services (collectively, the "Service"), operated by CampCompass Inc. ("us", "we", or "our").</p>
+        <p>Welcome to Calendar of Camps! These Terms of Service ("Terms") govern your use of the Calendar of Camps website and services (collectively, the "Service"), operated by Calendar of Camps Inc. ("us", "we", or "our").</p>
 
         <h2 className="font-headline">1. Acceptance of Terms</h2>
         <p>By accessing or using our Service, you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access the Service.</p>
@@ -24,17 +26,17 @@ export default function TermsPage() {
         {/* Add more details on content ownership, restrictions, crowdsourcing incentives */}
         
         <h2 className="font-headline">5. Intellectual Property</h2>
-        <p>The Service and its original content (excluding Content provided by users), features and functionality are and will remain the exclusive property of CampCompass Inc. and its licensors.</p>
+        <p>The Service and its original content (excluding Content provided by users), features and functionality are and will remain the exclusive property of Calendar of Camps Inc. and its licensors.</p>
 
         <h2 className="font-headline">6. Links To Other Web Sites</h2>
-        <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by CampCompass Inc.</p>
-        <p>CampCompass Inc. has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that CampCompass Inc. shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.</p>
+        <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by Calendar of Camps Inc.</p>
+        <p>Calendar of Camps Inc. has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that Calendar of Camps Inc. shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.</p>
 
         <h2 className="font-headline">7. Termination</h2>
         <p>We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
 
         <h2 className="font-headline">8. Limitation Of Liability</h2>
-        <p>In no event shall CampCompass Inc., nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.</p>
+        <p>In no event shall Calendar of Camps Inc., nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.</p>
         
         <h2 className="font-headline">9. Governing Law</h2>
         <p>These Terms shall be governed and construed in accordance with the laws of [Your State/Country], without regard to its conflict of law provisions.</p>
@@ -43,7 +45,7 @@ export default function TermsPage() {
         <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
 
         <h2 className="font-headline">Contact Us</h2>
-        <p>If you have any questions about these Terms, please contact us at [Your Contact Email/Link to Contact Page].</p>
+        <p>If you have any questions about these Terms, please contact us at <a href="mailto:support@calendarofcamps.com" className="text-accent hover:underline">support@calendarofcamps.com</a> or via our <Link href="/contact" className="text-accent hover:underline">Contact Page</Link>.</p>
       </div>
     </div>
   );

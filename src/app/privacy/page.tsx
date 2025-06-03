@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function PrivacyPage() {
   return (
     <div className="container py-12 max-w-3xl mx-auto">
@@ -5,7 +7,7 @@ export default function PrivacyPage() {
       <div className="prose prose-lg max-w-none text-foreground prose-headings:text-primary prose-headings:font-headline">
         <p>Last Updated: {new Date().toLocaleDateString()}</p>
 
-        <p>CampCompass Inc. ("us", "we", or "our") operates the CampCompass website (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
+        <p>Calendar of Camps Inc. ("us", "we", or "our") operates the Calendar of Camps website (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
 
         <h2 className="font-headline">1. Information Collection and Use</h2>
         <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
@@ -26,7 +28,7 @@ export default function PrivacyPage() {
         <p>We may also collect information on how the Service is accessed and used ("Usage Data"). This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
 
         <h2 className="font-headline">2. Use of Data</h2>
-        <p>CampCompass Inc. uses the collected data for various purposes:</p>
+        <p>Calendar of Camps Inc. uses the collected data for various purposes:</p>
         <ul className="list-disc list-inside">
           <li>To provide and maintain our Service</li>
           <li>To notify you about changes to our Service</li>
@@ -51,7 +53,7 @@ export default function PrivacyPage() {
         <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
 
         <h2 className="font-headline">Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at [Your Contact Email/Link to Contact Page].</p>
+        <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:support@calendarofcamps.com" className="text-accent hover:underline">support@calendarofcamps.com</a> or via our <Link href="/contact" className="text-accent hover:underline">Contact Page</Link>.</p>
       </div>
     </div>
   );

@@ -53,7 +53,7 @@ export default function LoginPage() {
         <CardHeader className="text-center">
           <LogIn className="mx-auto h-12 w-12 text-primary mb-4" />
           <CardTitle className="text-3xl font-bold">Welcome Back!</CardTitle>
-          <CardDescription>Log in to your CampCompass account to continue.</CardDescription>
+          <CardDescription>Log in to your Calendar of Camps account to continue.</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-6">

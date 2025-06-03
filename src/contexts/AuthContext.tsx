@@ -26,13 +26,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = typeof window !== 'undefined' ? localStorage.getItem('campcompass_user') : null;
+    const storedUser = typeof window !== 'undefined' ? localStorage.getItem('calendarofcamps_user') : null;
     if (storedUser) {
       try {
         setUser(JSON.parse(storedUser));
       } catch (error) {
         console.error("Failed to parse stored user:", error);
-        localStorage.removeItem('campcompass_user');
+        localStorage.removeItem('calendarofcamps_user');
       }
     }
     setLoading(false);
@@ -41,15 +41,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = useCallback((userData: User) => {
     setUser(userData);
     if (typeof window !== 'undefined') {
-      localStorage.setItem('campcompass_user', JSON.stringify(userData));
+      localStorage.setItem('calendarofcamps_user', JSON.stringify(userData));
     }
   }, []);
 
   const logout = useCallback(() => {
     setUser(null);
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('campcompass_user');
-      localStorage.removeItem('campcompass_subscription'); // Also clear subscription info on logout
+      localStorage.removeItem('calendarofcamps_user');
+      localStorage.removeItem('calendarofcamps_subscription'); // Also clear subscription info on logout
     }
   }, []);
   
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (!prevUser) return null;
       const updatedUser = { ...prevUser, ...userData };
       if (typeof window !== 'undefined') {
-        localStorage.setItem('campcompass_user', JSON.stringify(updatedUser));
+        localStorage.setItem('calendarofcamps_user', JSON.stringify(updatedUser));
       }
       return updatedUser;
     });

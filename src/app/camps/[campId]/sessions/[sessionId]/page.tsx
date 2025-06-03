@@ -165,7 +165,7 @@ export default function SessionDetailPage() {
                   <CardTitle className="text-lg text-destructive">Important Note</CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm text-destructive/90">
-                  Registration is handled externally on the camp's own website. CampCompass does not process registrations or payments. Capacity may be limited.
+                  Registration is handled externally on the camp's own website. Calendar of Camps does not process registrations or payments. Capacity may be limited.
                 </CardContent>
               </Card>
             </div>
