@@ -137,7 +137,7 @@ export default function SearchPage() {
       {/* Filters Section */}
       <Disclosure>
         {({ open }) => (
-          <>
+          <div> {/* Changed from React.Fragment to div */}
             <Disclosure.Button className="w-full flex justify-between items-center py-3 px-4 mb-4 text-left text-lg font-medium text-primary bg-primary/10 rounded-lg hover:bg-primary/20 focus:outline-none focus-visible:ring focus-visible:ring-primary focus-visible:ring-opacity-75">
               <span><Filter className="inline mr-2 h-5 w-5" />Advanced Filters</span>
               {/* Using Lucide ChevronUpIcon, ensure it's imported correctly */}
@@ -229,7 +229,7 @@ export default function SearchPage() {
                 </div>
               </Disclosure.Panel>
             </Transition>
-          </>
+          </div>
         )}
       </Disclosure>
 
@@ -273,4 +273,3 @@ export default function SearchPage() {
     </div>
   );
 }
-
