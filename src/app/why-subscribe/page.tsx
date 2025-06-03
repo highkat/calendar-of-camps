@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, Search, CalendarCheck, Percent, Users, Bot } from 'lucide-react';
@@ -21,8 +22,7 @@ export default function WhySubscribePage() {
             { icon: CalendarCheck, title: "Advanced Search & Filters", description: "Pinpoint the perfect camp with powerful filters for theme, dates, cost, amenities, and more." },
             { icon: Bot, title: "AI-Powered Recommendations", description: "Get personalized camp suggestions based on your family's preferences and search history." },
             { icon: Users, title: "Detailed Camp Profiles", description: "Access in-depth information, photos, and parent reviews for each camp." },
-            { icon: Percent, title: "Crowdsource Discounts", description: "Submit new camps and earn exclusive discount codes for your subscription renewal." },
-            // { icon: CheckCircle, title: "Priority Support", description: "Receive faster assistance from our dedicated support team." }, // Removed Priority Support
+            { icon: Percent, title: "Earn Subscription Discounts", description: "Contribute 3 approved, unique camp sessions to our database and receive a 25% discount code for any new subscription or renewal." },
           ].map((feature, index) => (
             <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader className="items-center text-center">
@@ -52,19 +52,19 @@ export default function WhySubscribePage() {
             </div>
             <div>
               <h2 className="text-3xl font-bold mb-6">Ready to Simplify Your Summer?</h2>
-              <p className="text-lg opacity-90 mb-8">
-                Choose a plan that works for you and start planning an unforgettable summer for your kids.
+              <p className="text-lg opacity-90 mb-4">
+                Choose a plan that works for you. Get our Annual Plan for $50/year or save with our 2-Year Plan for just $90!
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" variant="secondary" asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
-                  <Link href="/signup?plan=premium_1y">Subscribe Yearly</Link>
+                  <Link href="/signup?plan=premium_1y">Subscribe Yearly ($50)</Link>
                 </Button>
                 <Button size="lg" variant="secondary" asChild>
-                  <Link href="/signup?plan=premium_3y">Subscribe for 3 Years (Best Value)</Link>
+                  <Link href="/signup?plan=premium_2y">Subscribe for 2 Years ($90 - Best Value)</Link>
                 </Button>
               </div>
-               <p className="text-sm opacity-80 mt-4">
-                Discounts available for submitting new camp information! <Link href="/submit-camp" className="underline hover:opacity-100">Learn more</Link>.
+               <p className="text-sm opacity-80 mt-6">
+                Help grow our community! Contribute 3 approved, unique camp sessions and receive a 25% discount. Listing camps is always free for organizers. <Link href="/submit-camp" className="underline hover:opacity-100">Submit a Camp</Link>.
               </p>
             </div>
           </div>

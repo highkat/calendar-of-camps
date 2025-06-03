@@ -1,3 +1,4 @@
+
 "use client";
 import { useState, FormEvent } from 'react';
 import Link from 'next/link';
@@ -22,7 +23,18 @@ export default function SignupPage() {
   const router = useRouter();
   const { toast } = useToast();
   const searchParams = useSearchParams();
-  const plan = searchParams.get('plan'); // e.g., premium_1y
+  const planQueryParam = searchParams.get('plan');
+
+  const getPlanDescription = (planCode: string | null) => {
+    if (planCode === 'premium_1y') {
+      return 'You are signing up for the Annual Plan ($50/year).';
+    }
+    if (planCode === 'premium_2y') {
+      return 'You are signing up for the 2-Year Plan ($90, save $10).';
+    }
+    return null;
+  };
+  const planDescription = getPlanDescription(planQueryParam);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -53,9 +65,10 @@ export default function SignupPage() {
     login(mockUser); // Automatically log in the user after signup
     toast({ title: "Signup Successful!", description: `Welcome to Calendar of Camps, ${name}!` });
 
-    if (plan) {
+    if (planQueryParam) {
       // Redirect to a payment page or a plan confirmation page
-      router.push(`/checkout?plan=${plan}`); // Placeholder checkout page
+      // For now, let's assume /checkout is a placeholder for payment processing
+      router.push(`/checkout?plan=${planQueryParam}`); 
     } else {
       router.push('/profile'); 
     }
@@ -144,9 +157,9 @@ export default function SignupPage() {
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? 'Creating Account...' : 'Sign Up'}
             </Button>
-            {plan && (
+            {planDescription && (
               <p className="text-sm text-center text-muted-foreground">
-                You are signing up for the {plan.replace('_', ' ')} plan.
+                {planDescription}
               </p>
             )}
             <p className="text-sm text-center text-muted-foreground">

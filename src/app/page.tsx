@@ -162,7 +162,7 @@ export default function HomePage() {
                 </li>
                 <li className="flex items-center">
                   <Award className="h-6 w-6 text-accent mr-3 shrink-0" />
-                  <span>Discounts on subscriptions for contributing camp data.</span>
+                  <span>Earn a 25% discount on subscriptions by contributing 3 approved, unique camp sessions.</span>
                 </li>
               </ul>
               <Button size="lg" asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">

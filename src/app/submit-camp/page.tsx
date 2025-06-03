@@ -1,3 +1,4 @@
+
 "use client";
 import { useState, FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
@@ -37,7 +38,7 @@ export default function SubmitCampPage() {
     console.log('Submitting camp:', { campName /* ...other fields */ });
     toast({
       title: "Camp Submitted!",
-      description: "Your camp submission has been received and is pending review. You may receive a discount code upon approval.",
+      description: "Your camp submission has been received and is pending review. You'll receive a 25% discount code for 3 approved unique sessions!",
     });
     // Reset form or redirect
     setCampName('');
@@ -55,7 +56,7 @@ export default function SubmitCampPage() {
           </CardHeader>
           <CardContent>
             <Button asChild>
-              <Link href="/login">Login or Sign Up</Link>
+              <Link href="/login?redirect=/submit-camp">Login or Sign Up</Link>
             </Button>
           </CardContent>
         </Card>
@@ -73,7 +74,7 @@ export default function SubmitCampPage() {
           <CardHeader>
             <CardTitle className="text-2xl">Let&apos;s Check First!</CardTitle>
             <CardDescription>
-              To avoid duplicates, please search if the camp already exists in our database.
+              To avoid duplicates and help parents find unique options, please search if the camp already exists in our database. Listing your camp is free!
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -103,8 +104,7 @@ export default function SubmitCampPage() {
           <CardHeader>
             <CardTitle className="text-2xl">New Camp Submission</CardTitle>
             <CardDescription>
-              Fill in the details for the camp and its session(s). Fields marked with * are required.
-              Approved submissions may qualify for a subscription discount!
+             Help parents discover new camps! Listing your camp(s) on Calendar of Camps is completely free. Fill in the details for the camp and its session(s). Fields marked with * are required. As a thank you, if you submit 3 unique camp sessions that get approved by our administrators, you&apos;ll receive a unique 25% discount code for any Calendar of Camps subscription!
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
@@ -228,8 +228,8 @@ export default function SubmitCampPage() {
                 </Button>
               </fieldset>
             </CardContent>
-            <CardFooter className="flex justify-end p-6">
-               <Button variant="outline" type="button" onClick={() => setStep(1)} className="mr-4">
+            <CardFooter className="flex justify-between p-6">
+               <Button variant="outline" type="button" onClick={() => setStep(1)}>
                 Back to Pre-check
               </Button>
               <Button type="submit">
