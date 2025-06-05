@@ -37,8 +37,8 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary to-accent text-primary-foreground">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('https://source.unsplash.com/DqgMHzeio7g/1920x1080')", backgroundBlendMode: "multiply" }}
+          className="absolute inset-0 bg-cover bg-center opacity-30"
+          style={{ backgroundImage: "url('https://source.unsplash.com/DqgMHzeio7g/1920x1080')" }}
           data-ai-hint="people outdoors"
         ></div>
         <div className="container relative z-10 text-center">
