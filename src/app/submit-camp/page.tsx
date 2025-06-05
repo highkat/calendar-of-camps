@@ -16,8 +16,8 @@ import { useAuth } from '@/contexts/AuthContext';
 
 export default function SubmitCampPage() {
   const { toast } = useToast();
-  const { isAuthenticated, user } = useAuth();
-  const [step, setStep] = useState(1); // 1: Pre-check, 2: Form
+  const { isAuthenticated, user, loading: authLoading } = useAuth();
+  const [step, setStep] = useState(1);
   const [existingCampQuery, setExistingCampQuery] = useState('');
   const [campName, setCampName] = useState('');
   // Add more state for form fields as needed
@@ -63,6 +63,14 @@ export default function SubmitCampPage() {
     { title: "Admin Review", description: "Our team will review your submission. You'll be notified by email about the approval status." },
   ];
 
+  if (authLoading) {
+    return (
+      <div className="container py-12 md:py-16 text-center">
+        <p className="text-lg text-muted-foreground">Loading submission portal...</p>
+        {/* You could add a spinner component here if desired */}
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
