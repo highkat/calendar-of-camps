@@ -5,7 +5,7 @@ import { useSubscription } from '@/contexts/SubscriptionContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { User, Mail, Shield, CalendarDays, Bell, Edit3, LogOut, Smile, Users, Settings } from 'lucide-react';
+import { User, Mail, Shield, CalendarDays, Bell, Edit3, LogOut, Smile, Users, Settings, PlusCircle, Edit } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react'; // Import useEffect
@@ -101,6 +101,18 @@ export default function ProfilePage() {
                 <Bell className="mr-3 h-5 w-5 text-accent" /> Manage Registration Reminders
               </Link>
             </Button>
+            <Button variant="default" className="w-full justify-start" asChild>
+              <Link href="/submit-camp">
+                <PlusCircle className="mr-3 h-5 w-5" /> Submit a New Camp
+              </Link>
+            </Button>
+            {user.roles.includes('contributor') && (
+              <Button variant="secondary" className="w-full justify-start" asChild>
+                <Link href="/profile/my-camps"> {/* Placeholder link, update when dashboard exists */}
+                  <Edit className="mr-3 h-5 w-5" /> Manage My Camp Listings
+                </Link>
+              </Button>
+            )}
           </div>
         </CardContent>
         <CardFooter className="p-8 border-t flex justify-end">
