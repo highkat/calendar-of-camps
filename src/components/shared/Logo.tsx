@@ -5,7 +5,7 @@ interface LogoProps {
 }
 
 const LogoSvg = () => (
-  <svg viewBox="0 0 230 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-8 md:h-9 w-auto">
+  <svg data-version="4" viewBox="0 0 230 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-8 md:h-9 w-auto">
     {/* Calendar Icon background - Pink */}
     <rect x="4" y="8" width="42" height="38" rx="3.8" fill="#B4447A"/>
     {/* Calendar Rings - Pink */}
