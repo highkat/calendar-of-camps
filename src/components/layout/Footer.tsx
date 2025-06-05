@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Logo from '@/components/shared/Logo';
 import { FOOTER_LINKS, APP_NAME } from '@/lib/constants';
@@ -29,6 +30,11 @@ export default function Footer() {
               <li>
                  <Link href="/blog" className="text-muted-foreground hover:text-primary transition-colors">
                     Blog
+                  </Link>
+              </li>
+              <li>
+                 <Link href="/store" className="text-muted-foreground hover:text-primary transition-colors">
+                    Store
                   </Link>
               </li>
             </ul>

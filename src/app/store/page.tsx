@@ -1,8 +1,10 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ShoppingBag, ExternalLink } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 interface AffiliateProduct {
   id: string;
@@ -112,7 +114,3 @@ export default function StorePage() {
     </div>
   );
 }
-
-// Ensure Badge component is correctly imported or defined if it's custom.
-// Assuming Badge is from '@/components/ui/badge' and correctly styled.
-import { Badge } from '@/components/ui/badge';
