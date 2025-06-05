@@ -3,84 +3,80 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: var(--font-inter), sans-serif; /* Default to Inter for body */
-}
-
 @layer base {
   :root {
-    --background: 60 40% 92%; /* Light Cream */
-    --foreground: 220 25% 20%; /* Dark Navy */
-    --card: 60 40% 95%; /* Slightly Lighter Cream */
-    --card-foreground: 220 25% 20%; /* Dark Navy */
-    --popover: 60 40% 95%; /* Slightly Lighter Cream */
-    --popover-foreground: 220 25% 20%; /* Dark Navy */
-    --primary: 187 60% 30%; /* Teal */
-    --primary-foreground: 60 100% 98%; /* Very Light Cream/White */
-    --secondary: 165 30% 65%; /* Mint Green */
-    --secondary-foreground: 220 25% 20%; /* Dark Navy */
-    --muted: 60 30% 88%; /* Desaturated Cream */
-    --muted-foreground: 220 20% 40%; /* Softer Navy */
-    --accent: 2 65% 55%; /* Red/Terracotta */
-    --accent-foreground: 0 0% 100%; /* White */
-    --destructive: 2 65% 55%; /* Red/Terracotta */
-    --destructive-foreground: 0 0% 100%; /* White */
-    --border: 60 20% 80%; /* Light Grayish Cream */
-    --input: 60 30% 90%; /* Lighter Cream for input bg */
-    --ring: 187 60% 30%; /* Teal */
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --background: 220 25% 96%; /* Light Desaturated Blue */
+    --foreground: 240 60% 10%; /* Deep Saturated Blue */
+    --card: 220 25% 98%; /* Slightly Lighter Desaturated Blue */
+    --card-foreground: 240 60% 10%;
+    --popover: 220 25% 98%;
+    --popover-foreground: 240 60% 10%;
+    --primary: 235 48% 50%; /* Primary: Deep Saturated Blue (#3F51B5) */
+    --primary-foreground: 0 0% 100%; /* White for contrast on primary */
+    --secondary: 210 50% 70%; /* A lighter, softer blue */
+    --secondary-foreground: 240 60% 10%;
+    --muted: 220 30% 90%; /* Very Light Desaturated Blue for backgrounds (#E8EAF6) */
+    --muted-foreground: 240 30% 40%; /* A softer deep blue for muted text */
+    --accent: 265 52% 60%; /* Accent: Vibrant Violet (#7E57C2) */
+    --accent-foreground: 0 0% 100%; /* White for contrast on accent */
+    --destructive: 0 72% 51%; /* Standard destructive red */
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 20% 85%; /* Light blue-gray for borders */
+    --input: 220 20% 90%; /* Slightly darker for input fields against light background */
+    --ring: 235 48% 50%; /* Primary blue for focus rings */
+    --chart-1: 235 48% 50%;
+    --chart-2: 265 52% 60%;
+    --chart-3: 210 50% 70%;
+    --chart-4: 30 80% 60%; /* An orange for contrast in charts */
+    --chart-5: 120 40% 55%; /* A green for contrast in charts */
     --radius: 0.5rem;
 
     /* Sidebar specific colors - Light Theme */
-    --sidebar-background: 60 40% 97%; /* Very Light Cream, almost white */
-    --sidebar-foreground: 220 25% 20%; /* Dark Navy */
-    --sidebar-primary: 187 60% 30%; /* Teal */
-    --sidebar-primary-foreground: 60 100% 98%; /* Very Light Cream */
-    --sidebar-accent: 60 40% 92%; /* Main background (Light Cream) for sidebar item hover */
-    --sidebar-accent-foreground: 187 60% 30%; /* Teal (Primary color for text on sidebar accent) */
-    --sidebar-border: 60 20% 85%; /* Lighter border for sidebar */
-    --sidebar-ring: 187 60% 30%; /* Teal */
+    --sidebar-background: 220 25% 99%; /* Almost white blue */
+    --sidebar-foreground: 240 60% 10%;
+    --sidebar-primary: 235 48% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 25% 92%; /* Background for hover */
+    --sidebar-accent-foreground: 235 48% 50%;
+    --sidebar-border: 220 20% 88%;
+    --sidebar-ring: 235 48% 50%;
   }
 
   .dark {
-    --background: 220 25% 10%; /* Dark Navy BG */
-    --foreground: 60 40% 92%; /* Light Cream Text */
-    --card: 220 25% 12%; /* Slightly Lighter Dark Navy for Card BG */
-    --card-foreground: 60 40% 92%; /* Light Cream Text */
-    --popover: 220 25% 12%; /* Slightly Lighter Dark Navy for Popover BG */
-    --popover-foreground: 60 40% 92%; /* Light Cream Text */
-    --primary: 187 55% 45%; /* Brighter Teal */
-    --primary-foreground: 60 100% 98%; /* Very Light Cream/White Text on Primary */
-    --secondary: 165 35% 40%; /* Darker Mint Green */
-    --secondary-foreground: 60 40% 92%; /* Light Cream Text */
-    --muted: 220 20% 15%; /* Dark Muted BG */
-    --muted-foreground: 60 25% 75%; /* Lighter Muted Text */
-    --accent: 2 70% 65%; /* Brighter Red/Terracotta */
-    --accent-foreground: 220 25% 10%; /* Dark Navy Text on Accent */
-    --destructive: 2 70% 65%; /* Brighter Red/Terracotta */
-    --destructive-foreground: 220 25% 10%; /* Dark Navy Text on Destructive */
-    --border: 220 15% 25%; /* Dark Border */
-    --input: 220 15% 20%; /* Dark Input BG */
-    --ring: 187 55% 45%; /* Brighter Teal Ring */
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --background: 240 60% 8%; /* Very Deep Saturated Blue */
+    --foreground: 220 25% 90%; /* Light Desaturated Blue text */
+    --card: 240 60% 12%; 
+    --card-foreground: 220 25% 90%;
+    --popover: 240 60% 12%;
+    --popover-foreground: 220 25% 90%;
+    --primary: 235 55% 60%; /* Brighter Primary Blue for dark mode */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 45% 50%; /* Slightly desaturated mid-blue */
+    --secondary-foreground: 220 25% 95%;
+    --muted: 240 50% 15%; /* Darker version of #E8EAF6 logic */
+    --muted-foreground: 220 20% 65%;
+    --accent: 265 60% 70%; /* Brighter Accent Violet for dark mode */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 60% 60%; /* Brighter destructive red */
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 30% 25%; 
+    --input: 240 30% 20%; 
+    --ring: 235 55% 60%;
+    --chart-1: 235 55% 60%;
+    --chart-2: 265 60% 70%;
+    --chart-3: 210 45% 50%;
+    --chart-4: 30 70% 65%;
+    --chart-5: 120 45% 60%;
 
     /* Sidebar specific colors - Dark Theme */
-    --sidebar-background: 220 25% 12%; /* Card background */
-    --sidebar-foreground: 60 40% 92%; /* Light Cream Text */
-    --sidebar-primary: 187 55% 45%; /* Brighter Teal */
-    --sidebar-primary-foreground: 60 100% 98%; /* Very Light Cream/White */
-    --sidebar-accent: 220 20% 18%; /* Slightly lighter than card for hover */
-    --sidebar-accent-foreground: 60 40% 92%; /* Light cream text */
-    --sidebar-border: 220 15% 20%; /* Darker border for sidebar */
-    --sidebar-ring: 187 55% 45%; /* Brighter Teal */
+    --sidebar-background: 240 60% 10%; /* Slightly lighter than main dark bg */
+    --sidebar-foreground: 220 25% 90%;
+    --sidebar-primary: 235 55% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 50% 18%;
+    --sidebar-accent-foreground: 220 25% 90%;
+    --sidebar-border: 240 30% 22%;
+    --sidebar-ring: 235 55% 60%;
   }
 }
 
