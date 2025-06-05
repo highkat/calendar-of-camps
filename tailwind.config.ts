@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Source Sans Pro', 'sans-serif'],
-        headline: ['Montserrat', 'sans-serif'],
+        body: ['Encode Sans Condensed', 'sans-serif'],
+        headline: ['Varela Round', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
