@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,25 +9,25 @@ body {
 
 @layer base {
   :root {
-    --background: 230 50% 95%; /* Light desaturated blue */
-    --foreground: 230 20% 25%; /* Darker blue-gray for text for better readability on light blue */
-    --card: 0 0% 100%;
-    --card-foreground: 230 20% 25%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 230 20% 25%;
-    --primary: 231 48% 48%; /* Deep saturated blue */
-    --primary-foreground: 0 0% 98%; /* White/Near-white for text on primary */
-    --secondary: 230 30% 85%; /* Lighter blue for secondary elements */
-    --secondary-foreground: 231 48% 48%; /* Primary blue for text on secondary */
-    --muted: 230 30% 90%;
-    --muted-foreground: 230 20% 45%;
-    --accent: 260 42% 55%; /* Vibrant violet */
-    --accent-foreground: 0 0% 98%; /* White/Near-white for text on accent */
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 230 20% 80%;
-    --input: 230 20% 90%;
-    --ring: 231 48% 48%; /* Primary blue for rings */
+    --background: 60 40% 92%; /* Light Cream */
+    --foreground: 220 25% 20%; /* Dark Navy */
+    --card: 60 40% 95%; /* Slightly Lighter Cream */
+    --card-foreground: 220 25% 20%; /* Dark Navy */
+    --popover: 60 40% 95%; /* Slightly Lighter Cream */
+    --popover-foreground: 220 25% 20%; /* Dark Navy */
+    --primary: 187 60% 30%; /* Teal */
+    --primary-foreground: 60 100% 98%; /* Very Light Cream/White */
+    --secondary: 165 30% 65%; /* Mint Green */
+    --secondary-foreground: 220 25% 20%; /* Dark Navy */
+    --muted: 60 30% 88%; /* Desaturated Cream */
+    --muted-foreground: 220 20% 40%; /* Softer Navy */
+    --accent: 2 65% 55%; /* Red/Terracotta */
+    --accent-foreground: 0 0% 100%; /* White */
+    --destructive: 2 65% 55%; /* Red/Terracotta */
+    --destructive-foreground: 0 0% 100%; /* White */
+    --border: 60 20% 80%; /* Light Grayish Cream */
+    --input: 60 30% 90%; /* Lighter Cream for input bg */
+    --ring: 187 60% 30%; /* Teal */
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -34,51 +35,52 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    /* Sidebar specific colors - adjust if needed or inherit from above */
-    --sidebar-background: 0 0% 100%; /* Default to white or a very light gray for sidebar */
-    --sidebar-foreground: 230 20% 25%;
-    --sidebar-primary: 231 48% 48%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 230 50% 95%; /* Use main background as accent for sidebar */
-    --sidebar-accent-foreground: 231 48% 48%;
-    --sidebar-border: 230 20% 88%;
-    --sidebar-ring: 231 48% 48%;
+    /* Sidebar specific colors - Light Theme */
+    --sidebar-background: 60 40% 97%; /* Very Light Cream, almost white */
+    --sidebar-foreground: 220 25% 20%; /* Dark Navy */
+    --sidebar-primary: 187 60% 30%; /* Teal */
+    --sidebar-primary-foreground: 60 100% 98%; /* Very Light Cream */
+    --sidebar-accent: 60 40% 92%; /* Main background (Light Cream) for sidebar item hover */
+    --sidebar-accent-foreground: 187 60% 30%; /* Teal (Primary color for text on sidebar accent) */
+    --sidebar-border: 60 20% 85%; /* Lighter border for sidebar */
+    --sidebar-ring: 187 60% 30%; /* Teal */
   }
 
   .dark {
-    --background: 230 20% 10%; /* Dark blue-gray for dark mode background */
-    --foreground: 230 50% 95%; /* Light desaturated blue for text */
-    --card: 230 20% 12%;
-    --card-foreground: 230 50% 95%;
-    --popover: 230 20% 12%;
-    --popover-foreground: 230 50% 95%;
-    --primary: 231 48% 58%; /* Lighter primary blue for dark mode */
-    --primary-foreground: 0 0% 98%;
-    --secondary: 230 20% 20%;
-    --secondary-foreground: 230 50% 95%;
-    --muted: 230 20% 20%;
-    --muted-foreground: 230 30% 70%;
-    --accent: 260 42% 65%; /* Lighter accent violet for dark mode */
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 230 20% 30%;
-    --input: 230 20% 30%;
-    --ring: 231 48% 58%;
+    --background: 220 25% 10%; /* Dark Navy BG */
+    --foreground: 60 40% 92%; /* Light Cream Text */
+    --card: 220 25% 12%; /* Slightly Lighter Dark Navy for Card BG */
+    --card-foreground: 60 40% 92%; /* Light Cream Text */
+    --popover: 220 25% 12%; /* Slightly Lighter Dark Navy for Popover BG */
+    --popover-foreground: 60 40% 92%; /* Light Cream Text */
+    --primary: 187 55% 45%; /* Brighter Teal */
+    --primary-foreground: 60 100% 98%; /* Very Light Cream/White Text on Primary */
+    --secondary: 165 35% 40%; /* Darker Mint Green */
+    --secondary-foreground: 60 40% 92%; /* Light Cream Text */
+    --muted: 220 20% 15%; /* Dark Muted BG */
+    --muted-foreground: 60 25% 75%; /* Lighter Muted Text */
+    --accent: 2 70% 65%; /* Brighter Red/Terracotta */
+    --accent-foreground: 220 25% 10%; /* Dark Navy Text on Accent */
+    --destructive: 2 70% 65%; /* Brighter Red/Terracotta */
+    --destructive-foreground: 220 25% 10%; /* Dark Navy Text on Destructive */
+    --border: 220 15% 25%; /* Dark Border */
+    --input: 220 15% 20%; /* Dark Input BG */
+    --ring: 187 55% 45%; /* Brighter Teal Ring */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
 
-    --sidebar-background: 230 20% 12%;
-    --sidebar-foreground: 230 50% 95%;
-    --sidebar-primary: 231 48% 58%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 230 20% 15%;
-    --sidebar-accent-foreground: 230 50% 95%;
-    --sidebar-border: 230 20% 25%;
-    --sidebar-ring: 231 48% 58%;
+    /* Sidebar specific colors - Dark Theme */
+    --sidebar-background: 220 25% 12%; /* Card background */
+    --sidebar-foreground: 60 40% 92%; /* Light Cream Text */
+    --sidebar-primary: 187 55% 45%; /* Brighter Teal */
+    --sidebar-primary-foreground: 60 100% 98%; /* Very Light Cream/White */
+    --sidebar-accent: 220 20% 18%; /* Slightly lighter than card for hover */
+    --sidebar-accent-foreground: 60 40% 92%; /* Light cream text */
+    --sidebar-border: 220 15% 20%; /* Darker border for sidebar */
+    --sidebar-ring: 187 55% 45%; /* Brighter Teal */
   }
 }
 
