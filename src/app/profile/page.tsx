@@ -1,3 +1,4 @@
+
 "use client";
 import { useAuth } from '@/contexts/AuthContext';
 import { useSubscription } from '@/contexts/SubscriptionContext';
@@ -7,20 +8,23 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User, Mail, Shield, CalendarDays, Bell, Edit3, LogOut, Smile, Users, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react'; // Import useEffect
 
 export default function ProfilePage() {
   const { user, isAuthenticated, loading: authLoading, logout: authLogout } = useAuth();
   const { isSubscribed, subscriptionTier, loading: subLoading } = useSubscription();
   const router = useRouter();
 
-  if (authLoading || subLoading) {
-    return <div className="container py-12 text-center">Loading profile...</div>;
-  }
+  useEffect(() => {
+    if (!authLoading && (!isAuthenticated || !user)) {
+      // This should ideally be handled by middleware or a layout check
+      router.push('/login');
+    }
+  }, [authLoading, isAuthenticated, user, router]);
 
-  if (!isAuthenticated || !user) {
-    // This should ideally be handled by middleware or a layout check
-    router.push('/login');
-    return null; 
+  if (authLoading || subLoading || (!isAuthenticated || !user)) {
+    // Display loading or null while authentication is in progress or if redirecting
+    return <div className="container py-12 text-center">Loading profile...</div>;
   }
   
   const handleLogout = () => {
