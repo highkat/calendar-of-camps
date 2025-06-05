@@ -53,20 +53,51 @@ export default function SearchPage() {
   // Simulate fetching/filtering camps
   useEffect(() => {
     setIsLoading(true);
-    // In a real app, fetch from API based on searchTerm, radius, and filters
-    // For now, just use mock data and simple client-side filter by name
-    const filtered = mockCampSessions.filter(camp => 
-      camp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      camp.campName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      camp.theme.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    let intermediateCamps = mockCampSessions;
+
+    // Initial search by keyword (name, campName, theme)
+    if (searchTerm.trim()) {
+        intermediateCamps = intermediateCamps.filter(camp => 
+            camp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            camp.campName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            camp.theme.toLowerCase().includes(searchTerm.toLowerCase()) // Keep theme search here or rely on filter below
+        );
+    }
     
-    // Apply filters (simplified for mock)
-    const trulyFiltered = filtered.filter(camp => {
+    // Apply filters
+    const trulyFiltered = intermediateCamps.filter(camp => {
         let passes = true;
-        if (filters.theme && camp.theme !== filters.theme) passes = false;
-        if (filters.ageGroup && camp.ageRange !== filters.ageGroup) passes = false; // Simplified match
-        // Add more filter logic here
+
+        // Theme filter
+        if (filters.theme && filters.theme !== 'all' && camp.theme !== filters.theme) passes = false;
+        
+        // Age Group filter (Simplified match, as camp.ageRange is a string like "8-12" and filter is like "8-10")
+        // This needs more robust parsing if age ranges can overlap or be more complex.
+        if (filters.ageGroup && filters.ageGroup !== 'all' && camp.ageRange !== filters.ageGroup) passes = false; 
+        
+        // Gender filter (assuming camp.gender exists and matches 'boys', 'girls', 'co-ed')
+        // if (filters.gender && filters.gender !== 'all' && camp.gender !== filters.gender) passes = false;
+        
+        // Session Length filter (assuming camp.sessionLength exists)
+        // if (filters.sessionLength && filters.sessionLength !== 'all' && camp.sessionLength !== filters.sessionLength) passes = false;
+
+        // Date filtering (Requires camp objects to have date fields and proper comparison)
+        // if (filters.startDate && camp.startDate && new Date(camp.startDate) < new Date(filters.startDate)) passes = false;
+        // if (filters.endDate && camp.endDate && new Date(camp.endDate) > new Date(filters.endDate)) passes = false;
+        
+        // Cost filtering
+        if (filters.costMin || filters.costMax) {
+            const campCost = parseFloat(camp.cost.replace('$', ''));
+            if (!isNaN(campCost)) {
+                if (filters.costMin && campCost < parseFloat(filters.costMin)) passes = false;
+                if (filters.costMax && campCost > parseFloat(filters.costMax)) passes = false;
+            }
+        }
+
+        // Extended care options (Requires camp objects to have boolean fields like `hasBeforeCare`)
+        // if (filters.beforeCare && !camp.hasBeforeCare) passes = false;
+        // if (filters.afterCare && !camp.hasAfterCare) passes = false;
+        
         return passes;
     });
 
@@ -76,10 +107,7 @@ export default function SearchPage() {
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
-    // Trigger useEffect by state change (searchTerm update if local input is used, or filters change)
-    // If using a form submit button that *doesn't* update searchTerm state directly on input change,
-    // you might need to explicitly call a search/filter function or push to router to update URL params.
-    // For now, the input's onChange updates searchTerm, which triggers the effect.
+    // useEffect handles re-filtering when searchTerm or filters change
   };
   
   const handleFilterChange = (filterName: keyof typeof filters, value: string | boolean) => {
@@ -159,7 +187,7 @@ export default function SearchPage() {
                     <Select value={filters.theme} onValueChange={(val) => handleFilterChange('theme', val)}>
                       <SelectTrigger id="theme-filter"><SelectValue placeholder="Any Theme" /></SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Any Theme</SelectItem>
+                        <SelectItem value="all">Any Theme</SelectItem>
                         {CAMP_THEMES.map(theme => <SelectItem key={theme} value={theme}>{theme}</SelectItem>)}
                       </SelectContent>
                     </Select>
@@ -169,7 +197,7 @@ export default function SearchPage() {
                     <Select value={filters.ageGroup} onValueChange={(val) => handleFilterChange('ageGroup', val)}>
                       <SelectTrigger id="age-filter"><SelectValue placeholder="Any Age" /></SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Any Age</SelectItem>
+                        <SelectItem value="all">Any Age</SelectItem>
                         {CAMP_AGE_GROUPS.map(age => <SelectItem key={age} value={age}>{age}</SelectItem>)}
                       </SelectContent>
                     </Select>
@@ -179,7 +207,7 @@ export default function SearchPage() {
                     <Select value={filters.gender} onValueChange={(val) => handleFilterChange('gender', val)}>
                       <SelectTrigger id="gender-filter"><SelectValue placeholder="Any Gender" /></SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Any Gender</SelectItem>
+                        <SelectItem value="all">Any Gender</SelectItem>
                         <SelectItem value="boys">Boys Only</SelectItem>
                         <SelectItem value="girls">Girls Only</SelectItem>
                         <SelectItem value="co-ed">Co-ed</SelectItem>
@@ -191,7 +219,7 @@ export default function SearchPage() {
                     <Select value={filters.sessionLength} onValueChange={(val) => handleFilterChange('sessionLength', val)}>
                       <SelectTrigger id="session-length-filter"><SelectValue placeholder="Any Length" /></SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Any Length</SelectItem>
+                        <SelectItem value="all">Any Length</SelectItem>
                         {CAMP_SESSION_LENGTHS.map(len => <SelectItem key={len} value={len}>{len}</SelectItem>)}
                       </SelectContent>
                     </Select>
@@ -273,3 +301,4 @@ export default function SearchPage() {
     </div>
   );
 }
+
