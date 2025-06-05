@@ -6,11 +6,11 @@ interface LogoProps {
 
 const LogoSvg = () => (
   <svg viewBox="0 0 230 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-8 md:h-9 w-auto">
-    {/* Calendar Icon background - Changed to Pink */}
-    <rect x="4" y="8" width="42" height="38" rx="3.8" fill="#B4447A"/>
-    {/* Calendar Rings - Changed to Pink */}
-    <rect x="10" y="4" width="5.7" height="7.6" rx="1.9" fill="#B4447A"/>
-    <rect x="29.3" y="4" width="5.7" height="7.6" rx="1.9" fill="#B4447A"/>
+    {/* Calendar Icon background - Changed to Vibrant Violet */}
+    <rect x="4" y="8" width="42" height="38" rx="3.8" fill="#7E57C2"/>
+    {/* Calendar Rings - Changed to Vibrant Violet */}
+    <rect x="10" y="4" width="5.7" height="7.6" rx="1.9" fill="#7E57C2"/>
+    <rect x="29.3" y="4" width="5.7" height="7.6" rx="1.9" fill="#7E57C2"/>
     {/* Sun shape (semicircle on a base) - Remains Yellow */}
     <path d="M14.25 37.05V33.25C14.25 28.5312 18.0312 24.75 22.75 24.75C27.4688 24.75 31.25 28.5312 31.25 33.25V37.05H14.25Z" fill="#FDDA4E"/>
     {/* Sun Rays - Remains Yellow */}
@@ -20,9 +20,9 @@ const LogoSvg = () => (
     <line x1="13.3" y1="30.35" x2="9.5" y2="30.35" stroke="#FDDA4E" strokeWidth="1.9" strokeLinecap="round"/> {/* Left */}
     <line x1="32.2" y1="30.35" x2="36" y2="30.35" stroke="#FDDA4E" strokeWidth="1.9" strokeLinecap="round"/> {/* Right */}
 
-    {/* Text: "Calendar of Camps" - Changed to Teal */}
-    <text x="55" y="27" fontFamily="Montserrat, Arial, sans-serif" fontSize="19" fontWeight="bold" fill="#528982">Calendar</text>
-    <text x="55" y="47" fontFamily="Montserrat, Arial, sans-serif" fontSize="19" fontWeight="bold" fill="#528982">of Camps</text>
+    {/* Text: "Calendar of Camps" - Changed to Deep Saturated Blue */}
+    <text x="55" y="27" fontFamily="Montserrat, Arial, sans-serif" fontSize="19" fontWeight="bold" fill="#3F51B5">Calendar</text>
+    <text x="55" y="47" fontFamily="Montserrat, Arial, sans-serif" fontSize="19" fontWeight="bold" fill="#3F51B5">of Camps</text>
   </svg>
 );
 
