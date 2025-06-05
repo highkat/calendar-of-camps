@@ -1,3 +1,4 @@
+
 export const APP_NAME = "Calendar of Camps";
 
 export const NAV_LINKS = [
@@ -19,4 +20,5 @@ export type CampTheme = "Adventure" | "STEM" | "Arts" | "Sports" | "Academic" | 
 
 export const CAMP_THEMES: CampTheme[] = ["Adventure", "STEM", "Arts", "Sports", "Academic", "Tech", "Nature", "Music", "Drama", "Cooking", "General"];
 export const CAMP_AGE_GROUPS = ["5-7", "8-10", "11-13", "14-16", "All Ages"];
-export const CAMP_SESSION_LENGTHS = ["Half-day", "Full-day", "Overnight", "1 Week", "2 Weeks", "Monthly"];
+export const CAMP_SESSION_LENGTHS = ["Mornings", "Afternoons", "Full-day", "Overnight"];
+

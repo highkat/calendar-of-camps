@@ -10,9 +10,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from "@/hooks/use-toast";
 import { CAMP_THEMES, CAMP_AGE_GROUPS, CAMP_SESSION_LENGTHS } from '@/lib/constants';
-import { UploadCloud, PlusCircle, Search, CheckCircle, Edit } from 'lucide-react';
+import { UploadCloud, PlusCircle, Search, CheckCircle, Edit, Users } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
+
+interface SelectedAgeGroups {
+  [key: string]: boolean;
+}
 
 export default function SubmitCampPage() {
   const { toast } = useToast();
@@ -21,6 +25,19 @@ export default function SubmitCampPage() {
   const [existingCampQuery, setExistingCampQuery] = useState('');
   const [campName, setCampName] = useState('');
   // Add more state for form fields as needed
+  const [selectedAgeGroups, setSelectedAgeGroups] = useState<SelectedAgeGroups>(
+    CAMP_AGE_GROUPS.reduce((acc, ageGroup) => {
+      acc[ageGroup] = false;
+      return acc;
+    }, {} as SelectedAgeGroups)
+  );
+
+  const handleAgeGroupChange = (ageGroup: string) => {
+    setSelectedAgeGroups(prev => ({
+      ...prev,
+      [ageGroup]: !prev[ageGroup]
+    }));
+  };
 
   const handlePreCheck = (e: FormEvent) => {
     e.preventDefault();
@@ -34,8 +51,11 @@ export default function SubmitCampPage() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log('Submitting camp:', { campName /* ...other fields */ });
+    const chosenAgeGroups = Object.entries(selectedAgeGroups)
+      .filter(([,isSelected]) => isSelected)
+      .map(([ageGroup]) => ageGroup);
+
+    console.log('Submitting camp:', { campName, selectedAgeGroups: chosenAgeGroups /* ...other fields */ });
     toast({
       title: "Submission Received!",
       description: "Your camp information has been submitted for review. We'll notify you by email once it's approved or if any changes are needed. Thank you for contributing!",
@@ -43,6 +63,10 @@ export default function SubmitCampPage() {
     });
     // Reset form or redirect
     setCampName('');
+    setSelectedAgeGroups(CAMP_AGE_GROUPS.reduce((acc, ageGroup) => {
+      acc[ageGroup] = false;
+      return acc;
+    }, {} as SelectedAgeGroups));
     // ... reset other fields
     setExistingCampQuery('');
     setStep(1); // Go back to pre-check or redirect to a thank you page
@@ -67,7 +91,6 @@ export default function SubmitCampPage() {
     return (
       <div className="container py-12 md:py-16 text-center">
         <p className="text-lg text-muted-foreground">Loading submission portal...</p>
-        {/* You could add a spinner component here if desired */}
       </div>
     );
   }
@@ -238,16 +261,24 @@ export default function SubmitCampPage() {
                     </Select>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                   <div>
-                    <Label htmlFor="session-age">Age Range*</Label>
-                    <Select required>
-                      <SelectTrigger id="session-age"><SelectValue placeholder="Select age group" /></SelectTrigger>
-                      <SelectContent>
-                        {CAMP_AGE_GROUPS.map(age => <SelectItem key={age} value={age}>{age}</SelectItem>)}
-                      </SelectContent>
-                    </Select>
+                
+                <div className="mt-4">
+                  <Label className="font-semibold text-primary flex items-center"><Users className="mr-2 h-5 w-5"/>Age Range* (Select all that apply)</Label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-2 p-3 border rounded-md bg-muted/20">
+                    {CAMP_AGE_GROUPS.map((ageGroup) => (
+                      <div key={ageGroup} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={`age-${ageGroup}`}
+                          checked={selectedAgeGroups[ageGroup]}
+                          onCheckedChange={() => handleAgeGroupChange(ageGroup)}
+                        />
+                        <Label htmlFor={`age-${ageGroup}`} className="font-normal text-sm">{ageGroup}</Label>
+                      </div>
+                    ))}
                   </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                   <div>
                     <Label htmlFor="session-gender">Gender Specificity</Label>
                     <Select>
@@ -257,6 +288,15 @@ export default function SubmitCampPage() {
                         <SelectItem value="boys">Boys Only</SelectItem>
                         <SelectItem value="girls">Girls Only</SelectItem>
                       </SelectContent>
+                    </Select>
+                  </div>
+                   <div>
+                    <Label htmlFor="session-length">Session Length*</Label>
+                     <Select required>
+                        <SelectTrigger id="session-length"><SelectValue placeholder="Select length" /></SelectTrigger>
+                        <SelectContent>
+                            {CAMP_SESSION_LENGTHS.map(len => <SelectItem key={len} value={len}>{len}</SelectItem>)}
+                        </SelectContent>
                     </Select>
                   </div>
                 </div>
@@ -276,18 +316,9 @@ export default function SubmitCampPage() {
                         <Input type="number" id="session-cost" placeholder="e.g., 300" required />
                     </div>
                     <div>
-                        <Label htmlFor="session-length">Session Length</Label>
-                         <Select>
-                            <SelectTrigger id="session-length"><SelectValue placeholder="Select length" /></SelectTrigger>
-                            <SelectContent>
-                                {CAMP_SESSION_LENGTHS.map(len => <SelectItem key={len} value={len}>{len}</SelectItem>)}
-                            </SelectContent>
-                        </Select>
+                        <Label htmlFor="session-location">Location Address*</Label>
+                        <Input id="session-location" placeholder="123 Main St, Anytown, USA" required/>
                     </div>
-                </div>
-                <div className="mt-4">
-                    <Label htmlFor="session-location">Location Address*</Label>
-                    <Input id="session-location" placeholder="123 Main St, Anytown, USA" required/>
                 </div>
                 <div className="mt-4">
                     <Label htmlFor="registration-url">External Registration URL*</Label>
@@ -324,3 +355,4 @@ export default function SubmitCampPage() {
     </div>
   );
 }
+
