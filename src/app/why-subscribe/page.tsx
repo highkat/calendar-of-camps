@@ -59,7 +59,7 @@ export default function WhySubscribePage() {
                 <Button size="lg" variant="secondary" asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
                   <Link href="/signup?plan=premium_1y">Subscribe Yearly ($50)</Link>
                 </Button>
-                <Button size="lg" variant="secondary" asChild>
+                <Button size="lg" variant="secondary" asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
                   <Link href="/signup?plan=premium_2y">Subscribe for 2 Years ($90 - Best Value)</Link>
                 </Button>
               </div>
