@@ -56,10 +56,10 @@ export default function WhySubscribePage() {
                 Choose a plan that works for you. Get our Annual Plan for $50/year or save with our 2-Year Plan for just $90!
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="secondary" asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
+                <Button size="lg" variant="secondary" asChild className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
                   <Link href="/signup?plan=premium_1y">Subscribe Yearly ($50)</Link>
                 </Button>
-                <Button size="lg" variant="secondary" asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
+                <Button size="lg" variant="secondary" asChild className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
                   <Link href="/signup?plan=premium_2y">Subscribe for 2 Years ($90 - Best Value)</Link>
                 </Button>
               </div>
