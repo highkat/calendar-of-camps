@@ -99,9 +99,7 @@ export default function HomePage() {
       entries.forEach(entry => {
         if (entry.target === elementRef.current && entry.isIntersecting) {
           setIsVisible(true);
-          if (observerRef.current) { // Ensure observerRef is defined before calling unobserve
-             unobserveInternal(entry.target);
-          }
+          unobserveInternal(entry.target); // unobserveInternal already checks observerRef.current
         }
       });
     }, [entries, unobserveInternal]);
