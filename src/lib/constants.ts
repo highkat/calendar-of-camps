@@ -2,7 +2,6 @@
 export const APP_NAME = "Calendar of Camps";
 
 export const NAV_LINKS = [
-  { href: "/", label: "Home" },
   { href: "/search", label: "Search Camps" },
   { href: "/submit-camp", label: "Submit a Camp" },
   { href: "/blog", label: "Blog" },
