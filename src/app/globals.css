@@ -11,13 +11,13 @@
     --card-foreground: 172 25% 15%;
     --popover: 172 30% 98%;
     --popover-foreground: 172 25% 15%;
-    --primary: 172 25% 35%; /* Teal (#3E706A) */
+    --primary: 172 25% 35%; /* Teal (based on #528982, darkened for AA contrast with white text) */
     --primary-foreground: 0 0% 100%; /* White */
     --secondary: 49 98% 65%; /* Yellow (#FDDA4E) */
-    --secondary-foreground: 49 100% 10%; /* Very Dark Yellow/Brown (#332B01) */
+    --secondary-foreground: 49 100% 10%; /* Very Dark Yellow/Brown (#332B01 for AA contrast) */
     --muted: 172 25% 92%; /* Light Teal Gray (#E2F1EF) */
     --muted-foreground: 172 20% 40%; /* Medium Teal Gray (#527671) */
-    --accent: 329 47% 42%; /* Pink (#A0386A) */
+    --accent: 329 47% 42%; /* Pink (based on #B4447A, darkened for AA contrast with white text) */
     --accent-foreground: 0 0% 100%; /* White */
     --destructive: 0 72% 51%; /* Standard destructive red */
     --destructive-foreground: 0 0% 100%;
@@ -49,21 +49,21 @@
     --card-foreground: 172 10% 85%;
     --popover: 172 15% 12%;
     --popover-foreground: 172 10% 85%;
-    --primary: 172 30% 45%; /* Brighter Teal (#508F87) */
+    --primary: 172 30% 55%; /* Brighter Teal (e.g. #66B2A7) */
     --primary-foreground: 0 0% 100%; /* White */
-    --secondary: 49 95% 70%; /* Brighter Yellow (#FEE066) */
-    --secondary-foreground: 49 100% 15%; /* Dark Yellow/Brown (#4D4102) */
+    --secondary: 49 95% 70%; /* Brighter Yellow (e.g. #FEE066) */
+    --secondary-foreground: 49 100% 15%; /* Dark Yellow/Brown (#4D4102 for AA contrast) */
     --muted: 172 10% 15%; /* Dark Teal Gray (#1D2625) */
     --muted-foreground: 172 10% 65%; /* Medium Light Teal Gray (#99A6A4) */
-    --accent: 329 55% 50%; /* Brighter Pink (#C44E8F) */
+    --accent: 329 55% 60%; /* Brighter Pink (e.g. #D9629F) */
     --accent-foreground: 0 0% 100%; /* White */
     --destructive: 0 60% 60%; /* Brighter destructive red */
     --destructive-foreground: 0 0% 100%;
     --border: 172 10% 25%; /* Dark Teal Gray (#334341) */
     --input: 172 10% 20%; /* Darker Teal Gray (#283533) */
-    --ring: 172 30% 45%; /* Brighter Teal for focus rings */
-    --chart-1: 172 30% 45%; /* Brighter Teal */
-    --chart-2: 329 55% 50%; /* Brighter Pink */
+    --ring: 172 30% 55%; /* Brighter Teal for focus rings */
+    --chart-1: 172 30% 55%; /* Brighter Teal */
+    --chart-2: 329 55% 60%; /* Brighter Pink */
     --chart-3: 49 95% 70%; /* Brighter Yellow */
     --chart-4: 210 70% 65%; /* Contrasting Brighter Blue */
     --chart-5: 140 55% 55%; /* Contrasting Brighter Green */
@@ -71,12 +71,12 @@
     /* Sidebar specific colors - Dark Theme */
     --sidebar-background: 172 15% 10%; /* Slightly Lighter Dark Teal Gray (#121A19) */
     --sidebar-foreground: 172 10% 85%; /* Light Tealish Gray Text */
-    --sidebar-primary: 172 30% 45%; /* Brighter Teal */
+    --sidebar-primary: 172 30% 55%; /* Brighter Teal */
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 172 15% 18%; /* Dark Teal Gray Accent Bg (#232E2D) */
     --sidebar-accent-foreground: 172 10% 85%; /* Light Tealish Gray Text on Accent */
     --sidebar-border: 172 10% 22%; /* Dark Teal Gray Border (#2D3B39) */
-    --sidebar-ring: 172 30% 45%; /* Brighter Teal */
+    --sidebar-ring: 172 30% 55%; /* Brighter Teal */
   }
 }
 
