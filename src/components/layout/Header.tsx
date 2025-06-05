@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -9,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import { Badge } from '@/components/ui/badge';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,8 +31,13 @@ export default function Header() {
         <Logo />
         <nav className="hidden md:flex items-center space-x-6">
           {NAV_LINKS.map((link) => (
-            <Link key={link.label} href={link.href} className={commonLinkClasses}>
+            <Link key={link.label} href={link.href} className={`${commonLinkClasses} flex items-center`}>
               {link.label}
+              {link.label === "Submit a Camp" && (
+                <Badge variant="secondary" className="ml-1.5 text-xs bg-accent text-accent-foreground hover:bg-accent/90">
+                  Free
+                </Badge>
+              )}
             </Link>
           ))}
         </nav>
@@ -87,8 +94,13 @@ export default function Header() {
                 <nav className="flex flex-col space-y-4 mb-auto">
                   {NAV_LINKS.map((link) => (
                     <SheetClose asChild key={link.label}>
-                      <Link href={link.href} className={mobileLinkClasses}>
+                      <Link href={link.href} className={`${mobileLinkClasses} flex items-center`}>
                         {link.label}
+                        {link.label === "Submit a Camp" && (
+                           <Badge variant="secondary" className="ml-1.5 text-xs bg-accent text-accent-foreground hover:bg-accent/90">
+                            Free
+                          </Badge>
+                        )}
                       </Link>
                     </SheetClose>
                   ))}

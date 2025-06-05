@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from "@/hooks/use-toast";
 import { CAMP_THEMES, CAMP_AGE_GROUPS, CAMP_SESSION_LENGTHS } from '@/lib/constants';
-import { UploadCloud, PlusCircle, Search } from 'lucide-react';
+import { UploadCloud, PlusCircle, Search, CheckCircle, Edit } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -37,25 +37,49 @@ export default function SubmitCampPage() {
     // Handle form submission logic
     console.log('Submitting camp:', { campName /* ...other fields */ });
     toast({
-      title: "Camp Submitted!",
-      description: "Your camp submission has been received and is pending review. You'll receive a 25% discount code for 3 approved unique sessions!",
+      title: "Submission Received!",
+      description: "Your camp information has been submitted for review. We'll notify you by email once it's approved or if any changes are needed. Thank you for contributing!",
+      duration: 7000,
     });
     // Reset form or redirect
     setCampName('');
     // ... reset other fields
+    setExistingCampQuery('');
     setStep(1); // Go back to pre-check or redirect to a thank you page
   };
 
+  const benefits = [
+    "It's completely FREE to list your camp sessions.",
+    "Reach thousands of engaged parents actively searching for camps.",
+    "Increase your camp's visibility and fill your spots faster.",
+    "User-friendly submission process.",
+    "Contribute 3 approved, unique camp sessions and earn a 25% discount code for any Calendar of Camps subscription!",
+  ];
+
+  const submissionSteps = [
+    { title: "Register or Log In", description: "You'll need an account to submit or manage your camp listings." },
+    { title: "Quick Pre-Check", description: "Use our search to ensure your camp isn't already listed. This helps avoid duplicates." },
+    { title: "Submit Camp Details", description: "Provide comprehensive information about your camp and its sessions." },
+    { title: "Admin Review", description: "Our team will review your submission. You'll be notified by email about the approval status." },
+  ];
+
+
   if (!isAuthenticated) {
     return (
-      <div className="container py-12 text-center">
-        <Card className="max-w-md mx-auto p-8">
-          <CardHeader>
-            <CardTitle className="text-2xl">Login Required</CardTitle>
-            <CardDescription>You need to be logged in to submit a camp.</CardDescription>
+      <div className="container py-12 md:py-16">
+         <div className="text-center mb-10">
+            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">List Your Camp for Free!</h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Reach thousands of parents and fill your camp sessions by listing on Calendar of Camps.
+            </p>
+        </div>
+        <Card className="max-w-md mx-auto p-6 md:p-8 bg-card shadow-xl">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl text-primary">Login Required</CardTitle>
+            <CardDescription>Please log in or create an account to submit or manage your camp listings.</CardDescription>
           </CardHeader>
-          <CardContent>
-            <Button asChild>
+          <CardContent className="mt-4">
+            <Button asChild className="w-full" size="lg">
               <Link href="/login?redirect=/submit-camp">Login or Sign Up</Link>
             </Button>
           </CardContent>
@@ -66,15 +90,64 @@ export default function SubmitCampPage() {
 
 
   return (
-    <div className="container py-12">
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-primary">Submit a New Camp</h1>
+    <div className="container py-12 md:py-16">
+      <div className="text-center mb-12">
+        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">List Your Camp for Free & Reach Thousands!</h1>
+        <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          Showcase your camp to engaged parents, fill your spots, and enjoy free marketing. It's easy and rewarding!
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-10 items-start mb-12">
+        <Card className="bg-muted/30 p-6">
+            <CardHeader className="p-0 pb-4">
+                <CardTitle className="text-2xl text-primary">Why List Your Camp?</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+                <ul className="space-y-3">
+                {benefits.map((benefit, index) => (
+                    <li key={index} className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-accent mr-2 mt-0.5 shrink-0" />
+                    <span>{benefit}</span>
+                    </li>
+                ))}
+                </ul>
+            </CardContent>
+        </Card>
+        <Card className="bg-card p-6 shadow-lg">
+            <CardHeader className="p-0 pb-4">
+                <CardTitle className="text-2xl text-primary">Simple Submission Process</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+                 <ol className="space-y-3">
+                    {submissionSteps.map((stepItem, index) => (
+                        <li key={index} className="flex items-start">
+                        <span className="flex items-center justify-center h-6 w-6 bg-accent text-accent-foreground rounded-full text-sm font-bold mr-3 shrink-0">{index + 1}</span>
+                        <div>
+                            <h4 className="font-semibold">{stepItem.title}</h4>
+                            <p className="text-sm text-muted-foreground">{stepItem.description}</p>
+                        </div>
+                        </li>
+                    ))}
+                </ol>
+                 <div className="mt-6 pt-4 border-t">
+                    <p className="text-sm text-muted-foreground mb-2">Already an organizer or submitted camps before?</p>
+                    <Button variant="outline" asChild className="w-full">
+                        <Link href="/login?redirect=/dashboard/camps"> {/* Placeholder redirect */}
+                            <Edit className="mr-2 h-4 w-4" /> Login to Manage Your Camps
+                        </Link>
+                    </Button>
+                </div>
+            </CardContent>
+        </Card>
+      </div>
       
       {step === 1 && (
-        <Card className="max-w-2xl mx-auto shadow-lg">
+        <Card className="max-w-2xl mx-auto shadow-xl">
           <CardHeader>
-            <CardTitle className="text-2xl">Let&apos;s Check First!</CardTitle>
+            <CardTitle className="text-2xl text-primary">Step 1: Quick Pre-Check</CardTitle>
             <CardDescription>
-              To avoid duplicates and help parents find unique options, please search if the camp already exists in our database. Listing your camp is free!
+              Before submitting, please search to see if the camp already exists. This helps us avoid duplicates and ensures parents find the most up-to-date information.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -91,7 +164,7 @@ export default function SubmitCampPage() {
                   required
                 />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full" size="lg">
                 <Search className="mr-2 h-5 w-5" /> Search for Existing Camp
               </Button>
             </form>
@@ -100,11 +173,11 @@ export default function SubmitCampPage() {
       )}
 
       {step === 2 && (
-        <Card className="max-w-3xl mx-auto shadow-lg">
+        <Card className="max-w-3xl mx-auto shadow-xl">
           <CardHeader>
-            <CardTitle className="text-2xl">New Camp Submission</CardTitle>
+            <CardTitle className="text-2xl text-primary">Step 2: Submit Camp & Session Details</CardTitle>
             <CardDescription>
-             Help parents discover new camps! Listing your camp(s) on Calendar of Camps is completely free. Fill in the details for the camp and its session(s). Fields marked with * are required. As a thank you, if you submit 3 unique camp sessions that get approved by our administrators, you&apos;ll receive a unique 25% discount code for any Calendar of Camps subscription!
+             Fill in the details for the camp and its session(s). Fields marked with * are required. All submissions are reviewed by an administrator before publishing. You'll be notified by email of the status. Remember, if you submit 3 unique camp sessions that get approved, you'll receive a 25% discount code for any Calendar of Camps subscription!
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
@@ -124,7 +197,7 @@ export default function SubmitCampPage() {
                 </div>
                 <div className="mt-4">
                   <Label htmlFor="camp-description">Camp Description*</Label>
-                  <Textarea id="camp-description" placeholder="A brief overview of the camp's focus and activities." required />
+                  <Textarea id="camp-description" placeholder="A brief overview of the camp's focus and activities." required rows={4}/>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
                   <div>
@@ -134,7 +207,7 @@ export default function SubmitCampPage() {
                   <div>
                     <Label htmlFor="camp-image">Camp Image/Logo</Label>
                     <Input id="camp-image" type="file" className="file:text-sm file:font-medium file:text-foreground" />
-                    <p className="text-xs text-muted-foreground mt-1">Upload an image (max 2MB).</p>
+                    <p className="text-xs text-muted-foreground mt-1">Upload an image (max 2MB). Recommended: wide format (e.g., 600x400px).</p>
                   </div>
                 </div>
               </fieldset>
@@ -215,24 +288,25 @@ export default function SubmitCampPage() {
                  <div className="mt-4 space-y-2">
                     <div className="flex items-center space-x-2">
                         <Checkbox id="before-care-available" />
-                        <Label htmlFor="before-care-available">Before Care Available</Label>
+                        <Label htmlFor="before-care-available" className="font-normal">Before Care Available</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                         <Checkbox id="after-care-available" />
-                        <Label htmlFor="after-care-available">After Care Available</Label>
+                        <Label htmlFor="after-care-available" className="font-normal">After Care Available</Label>
                     </div>
                 </div>
                 {/* Add button for "Add another session" for camps with multiple sessions */}
-                <Button variant="outline" type="button" className="mt-4 w-full md:w-auto">
+                <Button variant="outline" type="button" className="mt-6 w-full md:w-auto">
                   <PlusCircle className="mr-2 h-4 w-4" /> Add Another Session (for this Camp)
                 </Button>
+                 <p className="text-xs text-muted-foreground mt-1">You can add multiple sessions under one main camp submission.</p>
               </fieldset>
             </CardContent>
-            <CardFooter className="flex justify-between p-6">
+            <CardFooter className="flex flex-col sm:flex-row justify-between items-center p-6 gap-4">
                <Button variant="outline" type="button" onClick={() => setStep(1)}>
                 Back to Pre-check
               </Button>
-              <Button type="submit">
+              <Button type="submit" size="lg">
                 <UploadCloud className="mr-2 h-5 w-5" /> Submit Camp for Review
               </Button>
             </CardFooter>
