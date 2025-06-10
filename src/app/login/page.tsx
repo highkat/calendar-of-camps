@@ -17,17 +17,23 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [honeypot, setHoneypot] = useState(''); // Honeypot state
   const { login } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (honeypot) {
+      console.log("Honeypot triggered on login form. Potential bot.");
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
-    // Simulate API call for login
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Mock user data - in a real app, this comes from your auth backend
     let mockUser: User | null = null;
     if (email === 'parent@example.com' && password === 'password') {
       mockUser = { id: 'user1', email: 'parent@example.com', name: 'Busy Parent', roles: ['parent'] };
@@ -42,14 +48,14 @@ export default function LoginPage() {
     if (mockUser) {
       login(mockUser);
       toast({ title: "Login Successful", description: `Welcome back, ${mockUser.name}!` });
-      // TODO: Implement actual "Remember Me" functionality if desired
       if (rememberMe) {
         console.log("Remember me was checked");
       }
-      router.push('/profile'); // Redirect to profile or dashboard
+      router.push('/profile'); 
     } else {
       toast({ title: "Login Failed", description: "Invalid email or password.", variant: "destructive" });
     }
+    // setHoneypot(''); // Reset honeypot
     setIsLoading(false);
   };
 
@@ -62,6 +68,20 @@ export default function LoginPage() {
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
+            {/* Honeypot Field */}
+            <div className="absolute left-[-5000px]" aria-hidden="true">
+              <Label htmlFor="hp_session_info">Your session info (for bots only)</Label>
+              <Input
+                id="hp_session_info"
+                type="text"
+                name="hp_session_info"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <div className="relative">

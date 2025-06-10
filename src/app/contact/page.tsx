@@ -1,3 +1,4 @@
+
 "use client";
 import { useState, FormEvent } from 'react';
 import { Button } from '@/components/ui/button';
@@ -20,9 +21,21 @@ export default function ContactPage() {
   const [subject, setSubject] = useState(initialSubject);
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [honeypot, setHoneypot] = useState(''); // Honeypot state
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (honeypot) {
+      console.log("Honeypot triggered on contact form. Potential bot.");
+      // Silently exit or show a generic non-committal message if desired
+      // For now, just reset loading state and return
+      setIsLoading(false);
+      // You might still want to reset the form fields here if you showed a fake success
+      // but for silent failure, just exiting is fine.
+      return;
+    }
+
     setIsLoading(true);
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -36,6 +49,7 @@ export default function ContactPage() {
     setEmail('');
     setSubject('');
     setMessage('');
+    setHoneypot(''); // Reset honeypot
     setIsLoading(false);
   };
 
@@ -59,6 +73,20 @@ export default function ContactPage() {
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-6">
+            {/* Honeypot Field */}
+            <div className="absolute left-[-5000px]" aria-hidden="true">
+              <Label htmlFor="hp_message_contact">Your message (for bots only)</Label>
+              <Input
+                id="hp_message_contact"
+                type="text"
+                name="hp_message_contact"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>

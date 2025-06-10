@@ -40,6 +40,13 @@ export default function SubmitCampPage() {
   const [loginPassword, setLoginPassword] = useState('');
   const [loginRememberMe, setLoginRememberMe] = useState(false);
   const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [loginHoneypot, setLoginHoneypot] = useState('');
+
+  // State for pre-check form
+  const [preCheckHoneypot, setPreCheckHoneypot] = useState('');
+
+  // State for main camp submission form
+  const [campSubmitHoneypot, setCampSubmitHoneypot] = useState('');
 
 
   const handleAgeGroupChange = (ageGroup: string) => {
@@ -51,13 +58,23 @@ export default function SubmitCampPage() {
 
   const handlePreCheck = (e: FormEvent) => {
     e.preventDefault();
+    if (preCheckHoneypot) {
+      console.log("Honeypot triggered on pre-check form. Potential bot.");
+      return;
+    }
     console.log("Searching for camp:", existingCampQuery);
     setStep(2);
     toast({ title: "Pre-check complete", description: "No similar camp found. Please proceed with submission." });
+    setPreCheckHoneypot(''); // Reset honeypot
   };
 
   const handleCampSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (campSubmitHoneypot) {
+      console.log("Honeypot triggered on camp submission form. Potential bot.");
+      return;
+    }
+
     const chosenAgeGroups = Object.entries(selectedAgeGroups)
       .filter(([,isSelected]) => isSelected)
       .map(([ageGroup]) => ageGroup);
@@ -74,13 +91,19 @@ export default function SubmitCampPage() {
       return acc;
     }, {} as SelectedAgeGroups));
     setExistingCampQuery('');
+    setCampSubmitHoneypot(''); // Reset honeypot
     setStep(1); 
   };
 
   const handleLoginSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (loginHoneypot) {
+      console.log("Honeypot triggered on embedded login form. Potential bot.");
+      setIsLoginLoading(false);
+      return;
+    }
     setIsLoginLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000)); 
 
     let mockUser: User | null = null;
     if (loginEmail === 'parent@example.com' && loginPassword === 'password') {
@@ -94,10 +117,10 @@ export default function SubmitCampPage() {
     }
 
     if (mockUser) {
-      login(mockUser); // This updates AuthContext, triggering re-render
+      login(mockUser); 
       toast({ title: "Login Successful", description: `Welcome back, ${mockUser.name}!` });
       if (loginRememberMe) console.log("Remember me was checked for embedded login");
-      // No explicit redirect needed, AuthContext change will show the submission form
+      setLoginHoneypot(''); // Reset honeypot
     } else {
       toast({ title: "Login Failed", description: "Invalid email or password.", variant: "destructive" });
     }
@@ -144,6 +167,19 @@ export default function SubmitCampPage() {
           </CardHeader>
           <form onSubmit={handleLoginSubmit}>
             <CardContent className="space-y-4">
+              {/* Honeypot Field for Login */}
+              <div className="absolute left-[-5000px]" aria-hidden="true">
+                <Label htmlFor="hp_login_details">Your login details (for bots only)</Label>
+                <Input
+                  id="hp_login_details"
+                  type="text"
+                  name="hp_login_details"
+                  value={loginHoneypot}
+                  onChange={(e) => setLoginHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               <div className="space-y-2">
                 <Label htmlFor="login-email">Email</Label>
                 <div className="relative">
@@ -266,7 +302,7 @@ export default function SubmitCampPage() {
                  <div className="mt-6 pt-4 border-t">
                     <p className="text-sm text-muted-foreground mb-2">Already an organizer or submitted camps before?</p>
                     <Button variant="outline" asChild className="w-full">
-                        <Link href="/login?redirect=/dashboard/camps"> {/* Placeholder redirect */}
+                        <Link href="/login?redirect=/dashboard/camps"> 
                             <Edit className="mr-2 h-4 w-4" /> Login to Manage Your Camps
                         </Link>
                     </Button>
@@ -285,6 +321,19 @@ export default function SubmitCampPage() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handlePreCheck} className="space-y-6">
+              {/* Honeypot Field for Pre-Check */}
+              <div className="absolute left-[-5000px]" aria-hidden="true">
+                <Label htmlFor="hp_pre_check_query">Your pre-check query (for bots only)</Label>
+                <Input
+                  id="hp_pre_check_query"
+                  type="text"
+                  name="hp_pre_check_query"
+                  value={preCheckHoneypot}
+                  onChange={(e) => setPreCheckHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               <div>
                 <Label htmlFor="existing-camp-query" className="text-lg font-semibold">Camp Name or Organizer</Label>
                 <Input
@@ -315,6 +364,19 @@ export default function SubmitCampPage() {
           </CardHeader>
           <form onSubmit={handleCampSubmit}>
             <CardContent className="space-y-6">
+              {/* Honeypot Field for Camp Submission */}
+              <div className="absolute left-[-5000px]" aria-hidden="true">
+                <Label htmlFor="hp_camp_extra_info">Extra camp info (for bots only)</Label>
+                <Input
+                  id="hp_camp_extra_info"
+                  type="text"
+                  name="hp_camp_extra_info"
+                  value={campSubmitHoneypot}
+                  onChange={(e) => setCampSubmitHoneypot(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               {/* Camp Details Section */}
               <fieldset className="border p-4 rounded-md">
                 <legend className="text-lg font-semibold px-2 text-primary">Camp Details</legend>
@@ -345,7 +407,7 @@ export default function SubmitCampPage() {
                 </div>
               </fieldset>
 
-              {/* Session Details Section (Simplified - can be repeatable) */}
+              {/* Session Details Section */}
               <fieldset className="border p-4 rounded-md">
                 <legend className="text-lg font-semibold px-2 text-primary">Session Details</legend>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">

@@ -19,6 +19,7 @@ export default function SignupPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [honeypot, setHoneypot] = useState(''); // Honeypot state
   const { login } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
@@ -38,6 +39,13 @@ export default function SignupPage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (honeypot) {
+      console.log("Honeypot triggered on signup form. Potential bot.");
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
 
     if (password !== confirmPassword) {
@@ -54,25 +62,24 @@ export default function SignupPage() {
     // Simulate API call for signup
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Mock user creation - in a real app, this comes from your auth backend
     const mockUser: User = { 
       id: `user_${Date.now()}`, 
       email, 
       name, 
-      roles: ['parent'] as UserRole[] // Default role
+      roles: ['parent'] as UserRole[]
     };
     
-    login(mockUser); // Automatically log in the user after signup
+    login(mockUser); 
     toast({ title: "Signup Successful!", description: `Welcome to Calendar of Camps, ${name}!` });
 
     if (planQueryParam) {
-      // Redirect to a payment page or a plan confirmation page
-      // For now, let's assume /checkout is a placeholder for payment processing
       router.push(`/checkout?plan=${planQueryParam}`); 
     } else {
       router.push('/profile'); 
     }
     
+    // Reset honeypot along with other fields if needed, though not strictly necessary if redirecting
+    // setHoneypot('');
     setIsLoading(false);
   };
 
@@ -86,6 +93,20 @@ export default function SignupPage() {
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-6">
+            {/* Honeypot Field */}
+            <div className="absolute left-[-5000px]" aria-hidden="true">
+              <Label htmlFor="hp_user_preferences">Your preferences (for bots only)</Label>
+              <Input
+                id="hp_user_preferences"
+                type="text"
+                name="hp_user_preferences"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>
                <div className="relative">
