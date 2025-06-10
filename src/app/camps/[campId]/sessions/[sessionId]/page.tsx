@@ -1,3 +1,4 @@
+
 "use client";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -137,11 +138,11 @@ export default function SessionDetailPage() {
                     <Heart className="mr-2 h-5 w-5" /> Save to Calendar
                   </Button>
                   <Button variant="outline" className="w-full" onClick={handleSetReminder}>
-                    <BellPlus className="mr-2 h-5 w-5" /> Set Registration Reminder
+                    <BellPlus className="mr-2 h-5 w-5" /> Set Reminder
                   </Button>
                   <Button variant="outline" className="w-full" asChild>
                     <Link href={`#`} target="_blank" rel="noopener noreferrer"> {/* Replace # with actual registration link */}
-                      <Globe className="mr-2 h-5 w-5" /> Register on Camp Site
+                      <Globe className="mr-2 h-5 w-5" /> Register
                     </Link>
                   </Button>
                    <Button variant="ghost" className="w-full text-muted-foreground hover:text-primary">
