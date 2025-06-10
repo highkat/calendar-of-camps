@@ -14,7 +14,7 @@ import { Badge } from '@/components/ui/badge';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { isAuthenticated, user, logout: authLogout } = useAuth();
+  const { isAuthenticated, user, logout: authLogout, loading: authLoading } = useAuth();
   const router = useRouter();
 
   const handleLogout = () => {
@@ -24,6 +24,122 @@ export default function Header() {
 
   const commonLinkClasses = "text-sm font-medium transition-colors hover:text-primary";
   const mobileLinkClasses = "block py-2 text-lg hover:text-primary";
+
+  const renderAuthButtons = () => {
+    if (authLoading) {
+      return (
+        <>
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/login">
+              <LogIn className="mr-2 h-4 w-4" />
+              Login
+            </Link>
+          </Button>
+          <Button size="sm" asChild>
+            <Link href="/signup">
+              <UserPlus className="mr-2 h-4 w-4" />
+              Sign Up
+            </Link>
+          </Button>
+        </>
+      );
+    }
+
+    if (isAuthenticated) {
+      return (
+        <>
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/profile">
+              <UserCircle className="mr-2 h-4 w-4" />
+              {user?.name || 'Profile'}
+            </Link>
+          </Button>
+          <Button variant="outline" size="sm" onClick={handleLogout}>
+            <LogOut className="mr-2 h-4 w-4" />
+            Logout
+          </Button>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <Button variant="ghost" size="sm" asChild>
+          <Link href="/login">
+            <LogIn className="mr-2 h-4 w-4" />
+            Login
+          </Link>
+        </Button>
+        <Button size="sm" asChild>
+          <Link href="/signup">
+            <UserPlus className="mr-2 h-4 w-4" />
+            Sign Up
+          </Link>
+        </Button>
+      </>
+    );
+  };
+  
+  const renderMobileAuthButtons = () => {
+    if (authLoading) {
+      return (
+        <div className="space-y-2">
+          <SheetClose asChild>
+            <Button variant="ghost" className="w-full justify-start text-lg py-2" asChild>
+                <Link href="/login">
+                <LogIn className="mr-2 h-5 w-5" />
+                Login
+                </Link>
+            </Button>
+          </SheetClose>
+          <SheetClose asChild>
+            <Button className="w-full justify-start text-lg py-2" asChild>
+                <Link href="/signup">
+                <UserPlus className="mr-2 h-5 w-5" />
+                Sign Up
+                </Link>
+            </Button>
+          </SheetClose>
+        </div>
+      );
+    }
+    if (isAuthenticated) {
+       return (
+         <>
+          <SheetClose asChild>
+            <Link href="/profile" className={`${mobileLinkClasses} flex items-center mb-4`}>
+              <UserCircle className="mr-2 h-5 w-5" />
+              {user?.name || 'Profile'}
+            </Link>
+          </SheetClose>
+          <Button variant="outline" className="w-full" onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}>
+            <LogOut className="mr-2 h-4 w-4" />
+            Logout
+          </Button>
+        </>
+       );
+    }
+    return (
+      <div className="space-y-2">
+          <SheetClose asChild>
+            <Button variant="ghost" className="w-full justify-start text-lg py-2" asChild>
+                <Link href="/login">
+                <LogIn className="mr-2 h-5 w-5" />
+                Login
+                </Link>
+            </Button>
+          </SheetClose>
+          <SheetClose asChild>
+            <Button className="w-full justify-start text-lg py-2" asChild>
+                <Link href="/signup">
+                <UserPlus className="mr-2 h-5 w-5" />
+                Sign Up
+                </Link>
+            </Button>
+          </SheetClose>
+        </div>
+    );
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -42,35 +158,7 @@ export default function Header() {
           ))}
         </nav>
         <div className="hidden md:flex items-center space-x-2">
-          {isAuthenticated ? (
-            <>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/profile">
-                  <UserCircle className="mr-2 h-4 w-4" />
-                  {user?.name || 'Profile'}
-                </Link>
-              </Button>
-              <Button variant="outline" size="sm" onClick={handleLogout}>
-                <LogOut className="mr-2 h-4 w-4" />
-                Logout
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/login">
-                  <LogIn className="mr-2 h-4 w-4" />
-                  Login
-                </Link>
-              </Button>
-              <Button size="sm" asChild>
-                <Link href="/signup">
-                  <UserPlus className="mr-2 h-4 w-4" />
-                  Sign Up
-                </Link>
-              </Button>
-            </>
-          )}
+          {renderAuthButtons()}
         </div>
         <div className="md:hidden">
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
@@ -106,39 +194,7 @@ export default function Header() {
                   ))}
                 </nav>
                 <div className="mt-6 border-t pt-6">
-                  {isAuthenticated ? (
-                     <>
-                      <SheetClose asChild>
-                        <Link href="/profile" className={`${mobileLinkClasses} flex items-center mb-4`}>
-                          <UserCircle className="mr-2 h-5 w-5" />
-                          {user?.name || 'Profile'}
-                        </Link>
-                      </SheetClose>
-                      <Button variant="outline" className="w-full" onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}>
-                        <LogOut className="mr-2 h-4 w-4" />
-                        Logout
-                      </Button>
-                    </>
-                  ) : (
-                    <div className="space-y-2">
-                       <SheetClose asChild>
-                        <Button variant="ghost" className="w-full justify-start text-lg py-2" asChild>
-                            <Link href="/login">
-                            <LogIn className="mr-2 h-5 w-5" />
-                            Login
-                            </Link>
-                        </Button>
-                       </SheetClose>
-                       <SheetClose asChild>
-                        <Button className="w-full justify-start text-lg py-2" asChild>
-                            <Link href="/signup">
-                            <UserPlus className="mr-2 h-5 w-5" />
-                            Sign Up
-                            </Link>
-                        </Button>
-                       </SheetClose>
-                    </div>
-                  )}
+                  {renderMobileAuthButtons()}
                 </div>
               </div>
             </SheetContent>
