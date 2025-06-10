@@ -162,13 +162,6 @@ export default function SessionDetailPage() {
                   <Button variant="outline" className="w-full" onClick={handleSetReminder}>
                     <BellPlus className="mr-2 h-5 w-5" /> Set Reminder
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    className="w-full" 
-                    onClick={() => handleExternalLinkClick(`https://example.com/register-for-${session.id}`)}
-                  >
-                      <Globe className="mr-2 h-5 w-5" /> Register
-                  </Button>
                    <Button variant="ghost" className="w-full text-muted-foreground hover:text-primary">
                     <Share2 className="mr-2 h-5 w-5" /> Share
                   </Button>
