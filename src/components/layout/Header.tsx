@@ -34,8 +34,8 @@ export default function Header() {
     }
   };
 
-  const commonLinkClasses = "text-sm font-medium transition-colors hover:text-primary";
-  const mobileLinkClasses = "block py-2 text-lg hover:text-primary";
+  const commonLinkClasses = "text-sm font-medium transition-colors hover:text-primary flex items-center";
+  const mobileLinkClasses = "block py-2 text-lg hover:text-primary flex items-center";
 
   const renderAuthButtons = () => {
     if (authLoading) {
@@ -119,7 +119,7 @@ export default function Header() {
        return (
          <>
           <SheetClose asChild>
-            <Link href="/profile" className={`${mobileLinkClasses} flex items-center mb-4`}>
+            <Link href="/profile" className={`${mobileLinkClasses} mb-4`}>
               <UserCircle className="mr-2 h-5 w-5" />
               {user?.name || 'Profile'}
             </Link>
@@ -159,12 +159,22 @@ export default function Header() {
         <Logo />
         <nav className="hidden md:flex items-center space-x-4 ml-6">
           {NAV_LINKS.map((link) => (
-            <Link key={link.label} href={link.href} className={`${commonLinkClasses} flex items-center`}>
-              {link.label}
-              {link.label === "Submit a Camp" && (
-                <Badge variant="accent_compact" className="ml-1.5">
-                  Free
-                </Badge>
+            <Link key={link.label} href={link.href} className={`${commonLinkClasses}`}>
+              {link.label === "Submit a Camp" ? (
+                <>
+                  Submit a&nbsp;
+                  <span className="relative">
+                    Camp
+                    <Badge
+                      variant="accent_compact"
+                      className="absolute top-0 left-full ml-0.5 -translate-y-[45%]"
+                    >
+                      Free
+                    </Badge>
+                  </span>
+                </>
+              ) : (
+                link.label
               )}
             </Link>
           ))}
@@ -210,12 +220,22 @@ export default function Header() {
                 <nav className="flex flex-col space-y-4 mb-auto">
                   {NAV_LINKS.map((link) => (
                     <SheetClose asChild key={link.label}>
-                      <Link href={link.href} className={`${mobileLinkClasses} flex items-center`}>
-                        {link.label}
-                        {link.label === "Submit a Camp" && (
-                           <Badge variant="accent_compact" className="ml-1.5">
-                            Free
-                          </Badge>
+                      <Link href={link.href} className={`${mobileLinkClasses}`}>
+                        {link.label === "Submit a Camp" ? (
+                          <>
+                            Submit a&nbsp;
+                            <span className="relative">
+                              Camp
+                              <Badge
+                                variant="accent_compact"
+                                className="absolute top-0 left-full ml-0.5 -translate-y-[45%]"
+                              >
+                                Free
+                              </Badge>
+                            </span>
+                          </>
+                        ) : (
+                          link.label
                         )}
                       </Link>
                     </SheetClose>
