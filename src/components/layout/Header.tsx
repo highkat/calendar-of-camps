@@ -2,11 +2,12 @@
 "use client";
 
 import Link from 'next/link';
-import { useState } from 'react';
-import { Menu, X, UserCircle, LogOut, LogIn, UserPlus } from 'lucide-react';
+import React, { useState } from 'react'; // Added React for FormEvent
+import { Menu, X, UserCircle, LogOut, LogIn, UserPlus, Search } from 'lucide-react'; // Added Search icon
 import Logo from '@/components/shared/Logo';
 import { NAV_LINKS } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input'; // Added Input
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
@@ -16,10 +17,21 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isAuthenticated, user, logout: authLogout, loading: authLoading } = useAuth();
   const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleLogout = () => {
     authLogout();
     router.push('/');
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery(''); // Clear search input after submission
+    } else {
+      router.push('/search'); // Navigate to search page even if query is empty
+    }
   };
 
   const commonLinkClasses = "text-sm font-medium transition-colors hover:text-primary";
@@ -143,9 +155,9 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-16 items-center">
         <Logo />
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-4 ml-6">
           {NAV_LINKS.map((link) => (
             <Link key={link.label} href={link.href} className={`${commonLinkClasses} flex items-center`}>
               {link.label}
@@ -157,10 +169,26 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <div className="hidden md:flex items-center space-x-2">
+
+        <div className="hidden md:flex flex-grow items-center justify-end space-x-2">
+          <form onSubmit={handleSearchSubmit} className="flex items-center max-w-xs mr-4">
+            <Input
+              type="search"
+              placeholder="Search camps..."
+              className="h-9 text-sm rounded-r-none focus-visible:ring-offset-0 focus-visible:ring-1"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search camps"
+            />
+            <Button type="submit" size="icon" variant="ghost" className="h-9 w-9 rounded-l-none border border-l-0 border-input hover:bg-accent">
+              <Search className="h-4 w-4" />
+              <span className="sr-only">Search</span>
+            </Button>
+          </form>
           {renderAuthButtons()}
         </div>
-        <div className="md:hidden">
+
+        <div className="md:hidden flex-grow flex justify-end">
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
