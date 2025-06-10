@@ -10,9 +10,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from "@/hooks/use-toast";
 import { CAMP_THEMES, CAMP_AGE_GROUPS, CAMP_SESSION_LENGTHS } from '@/lib/constants';
-import { UploadCloud, PlusCircle, Search, CheckCircle, Edit, Users } from 'lucide-react';
+import { UploadCloud, PlusCircle, Search, CheckCircle, Edit, Users, LogIn, Mail, Key } from 'lucide-react';
 import Link from 'next/link';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth, type User } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 
 interface SelectedAgeGroups {
   [key: string]: boolean;
@@ -20,17 +21,26 @@ interface SelectedAgeGroups {
 
 export default function SubmitCampPage() {
   const { toast } = useToast();
-  const { isAuthenticated, user, loading: authLoading } = useAuth();
+  const { isAuthenticated, user, loading: authLoading, login } = useAuth();
+  const router = useRouter();
+
+  // State for camp submission form
   const [step, setStep] = useState(1);
   const [existingCampQuery, setExistingCampQuery] = useState('');
   const [campName, setCampName] = useState('');
-  // Add more state for form fields as needed
   const [selectedAgeGroups, setSelectedAgeGroups] = useState<SelectedAgeGroups>(
     CAMP_AGE_GROUPS.reduce((acc, ageGroup) => {
       acc[ageGroup] = false;
       return acc;
     }, {} as SelectedAgeGroups)
   );
+
+  // State for embedded login form
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginRememberMe, setLoginRememberMe] = useState(false);
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
+
 
   const handleAgeGroupChange = (ageGroup: string) => {
     setSelectedAgeGroups(prev => ({
@@ -41,36 +51,59 @@ export default function SubmitCampPage() {
 
   const handlePreCheck = (e: FormEvent) => {
     e.preventDefault();
-    // Simulate search for existing camp
     console.log("Searching for camp:", existingCampQuery);
-    // In a real app, query DB here
-    // For demo, assume not found and proceed
     setStep(2);
     toast({ title: "Pre-check complete", description: "No similar camp found. Please proceed with submission." });
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleCampSubmit = (e: FormEvent) => {
     e.preventDefault();
     const chosenAgeGroups = Object.entries(selectedAgeGroups)
       .filter(([,isSelected]) => isSelected)
       .map(([ageGroup]) => ageGroup);
 
-    console.log('Submitting camp:', { campName, selectedAgeGroups: chosenAgeGroups /* ...other fields */ });
+    console.log('Submitting camp:', { campName, selectedAgeGroups: chosenAgeGroups });
     toast({
       title: "Submission Received!",
       description: "Your camp information has been submitted for review. We'll notify you by email once it's approved or if any changes are needed. Thank you for contributing!",
       duration: 7000,
     });
-    // Reset form or redirect
     setCampName('');
     setSelectedAgeGroups(CAMP_AGE_GROUPS.reduce((acc, ageGroup) => {
       acc[ageGroup] = false;
       return acc;
     }, {} as SelectedAgeGroups));
-    // ... reset other fields
     setExistingCampQuery('');
-    setStep(1); // Go back to pre-check or redirect to a thank you page
+    setStep(1); 
   };
+
+  const handleLoginSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsLoginLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+
+    let mockUser: User | null = null;
+    if (loginEmail === 'parent@example.com' && loginPassword === 'password') {
+      mockUser = { id: 'user1', email: 'parent@example.com', name: 'Busy Parent', roles: ['parent'] };
+    } else if (loginEmail === 'contributor@example.com' && loginPassword === 'password') {
+      mockUser = { id: 'user2', email: 'contributor@example.com', name: 'Camp Organizer', roles: ['contributor'] };
+    } else if (loginEmail === 'admin@example.com' && loginPassword === 'password') {
+      mockUser = { id: 'user3', email: 'admin@example.com', name: 'Site Admin', roles: ['admin', 'parent'] };
+    } else if (loginEmail === 'premium@example.com' && loginPassword === 'password') {
+       mockUser = { id: 'user4', email: 'premium@example.com', name: 'Premium User', roles: ['parent'] };
+    }
+
+    if (mockUser) {
+      login(mockUser); // This updates AuthContext, triggering re-render
+      toast({ title: "Login Successful", description: `Welcome back, ${mockUser.name}!` });
+      if (loginRememberMe) console.log("Remember me was checked for embedded login");
+      // No explicit redirect needed, AuthContext change will show the submission form
+    } else {
+      toast({ title: "Login Failed", description: "Invalid email or password.", variant: "destructive" });
+    }
+    setIsLoginLoading(false);
+  };
+
 
   const benefits = [
     "It's completely FREE to list your camp sessions.",
@@ -104,16 +137,85 @@ export default function SubmitCampPage() {
                 Whether you’re a camp organizer or a parent in the know, adding a camp to Calendar of Camps helps others find trusted, local options for their kids. Small, community-based camps often fly under the radar—your submission helps surface the hidden gems that families might otherwise miss. Not only are listings are FREE and easy to add, you unlock discounts for adding new camps. Together we’re building a resource that makes summer planning simpler for everyone.
             </p>
         </div>
-        <Card className="max-w-md mx-auto p-6 md:p-8 bg-card shadow-xl">
+        <Card className="w-full max-w-md mx-auto shadow-xl">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-primary">Login Required</CardTitle>
-            <CardDescription>Please log in or create an account to submit or manage your camp listings.</CardDescription>
+            <LogIn className="mx-auto h-10 w-10 text-primary mb-3" />
+            <CardTitle className="text-2xl font-bold">Login</CardTitle>
           </CardHeader>
-          <CardContent className="mt-4">
-            <Button asChild className="w-full" size="lg">
-              <Link href="/login?redirect=/submit-camp">Login or Sign Up</Link>
-            </Button>
-          </CardContent>
+          <form onSubmit={handleLoginSubmit}>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="login-email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input
+                    id="login-email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
+                    required
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="login-password">Password</Label>
+                <div className="relative">
+                  <Key className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input
+                    id="login-password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    required
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center justify-between pt-1">
+                <div className="flex items-center space-x-2">
+                  <Checkbox id="login-remember-me" checked={loginRememberMe} onCheckedChange={(checked) => setLoginRememberMe(!!checked)} />
+                  <Label htmlFor="login-remember-me" className="text-sm font-normal text-muted-foreground">
+                    Remember me
+                  </Label>
+                </div>
+                <Link href="/forgot-password" passHref>
+                  <Button variant="link" size="sm" className="p-0 h-auto text-xs">Forgot password?</Button>
+                </Link>
+              </div>
+            </CardContent>
+            <CardFooter className="flex flex-col gap-4 pt-2">
+              <Button type="submit" className="w-full" disabled={isLoginLoading}>
+                {isLoginLoading ? 'Logging in...' : 'Log In'}
+              </Button>
+              <div className="relative w-full my-1">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">
+                    Or sign in with
+                  </span>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+                <Button variant="outline" className="w-full" onClick={() => toast({title: "Social Login", description: "Google login clicked (not implemented)."})}>
+                  Google
+                </Button>
+                <Button variant="outline" className="w-full" onClick={() => toast({title: "Social Login", description: "Facebook login clicked (not implemented)."})}>
+                  Facebook
+                </Button>
+              </div>
+              <p className="mt-2 text-sm text-center text-muted-foreground">
+                New user?{' '}
+                <Link href="/signup" className="font-medium text-primary hover:underline">
+                  Sign up for an account
+                </Link>
+              </p>
+            </CardFooter>
+          </form>
         </Card>
       </div>
     );
@@ -211,7 +313,7 @@ export default function SubmitCampPage() {
              Fill in the details for the camp and its session(s). Fields marked with * are required. All submissions are reviewed by an administrator before publishing. You'll be notified by email of the status. Remember, if you submit 3 unique camp sessions that get approved, you'll receive a 25% discount code for any Calendar of Camps subscription!
             </CardDescription>
           </CardHeader>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleCampSubmit}>
             <CardContent className="space-y-6">
               {/* Camp Details Section */}
               <fieldset className="border p-4 rounded-md">
@@ -334,7 +436,6 @@ export default function SubmitCampPage() {
                         <Label htmlFor="after-care-available" className="font-normal">After Care Available</Label>
                     </div>
                 </div>
-                {/* Add button for "Add another session" for camps with multiple sessions */}
                 <Button variant="outline" type="button" className="mt-6 w-full md:w-auto">
                   <PlusCircle className="mr-2 h-4 w-4" /> Add Another Session (for this Camp)
                 </Button>
@@ -355,6 +456,3 @@ export default function SubmitCampPage() {
     </div>
   );
 }
-
-
-    

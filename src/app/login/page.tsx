@@ -59,7 +59,6 @@ export default function LoginPage() {
         <CardHeader className="text-center">
           <LogIn className="mx-auto h-10 w-10 text-primary mb-3" />
           <CardTitle className="text-2xl font-bold">Login</CardTitle>
-          <CardDescription>Access your Calendar of Camps account.</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
@@ -123,7 +122,6 @@ export default function LoginPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
               <Button variant="outline" className="w-full" onClick={() => toast({title: "Social Login", description: "Google login clicked (not implemented)."})}>
-                {/* In a real app, use SVG icons for brands */}
                 Google
               </Button>
               <Button variant="outline" className="w-full" onClick={() => toast({title: "Social Login", description: "Facebook login clicked (not implemented)."})}>
