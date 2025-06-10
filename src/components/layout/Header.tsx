@@ -162,7 +162,7 @@ export default function Header() {
             <Link key={link.label} href={link.href} className={`${commonLinkClasses} flex items-center`}>
               {link.label}
               {link.label === "Submit a Camp" && (
-                <Badge variant="secondary" className="ml-1.5 text-xs px-1.5 py-0 bg-accent text-accent-foreground hover:bg-accent/90">
+                <Badge variant="accent_compact" className="ml-1.5">
                   Free
                 </Badge>
               )}
@@ -213,7 +213,7 @@ export default function Header() {
                       <Link href={link.href} className={`${mobileLinkClasses} flex items-center`}>
                         {link.label}
                         {link.label === "Submit a Camp" && (
-                           <Badge variant="secondary" className="ml-1.5 text-xs px-1.5 py-0 bg-accent text-accent-foreground hover:bg-accent/90">
+                           <Badge variant="accent_compact" className="ml-1.5">
                             Free
                           </Badge>
                         )}
