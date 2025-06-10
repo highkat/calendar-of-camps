@@ -1,3 +1,4 @@
+
 "use client";
 import { useState, FormEvent } from 'react';
 import Link from 'next/link';
@@ -5,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import { LogIn, Mail, Key } from 'lucide-react';
 import { useAuth, type User } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
@@ -13,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const router = useRouter();
@@ -36,10 +39,13 @@ export default function LoginPage() {
        mockUser = { id: 'user4', email: 'premium@example.com', name: 'Premium User', roles: ['parent'] };
     }
 
-
     if (mockUser) {
       login(mockUser);
       toast({ title: "Login Successful", description: `Welcome back, ${mockUser.name}!` });
+      // TODO: Implement actual "Remember Me" functionality if desired
+      if (rememberMe) {
+        console.log("Remember me was checked");
+      }
       router.push('/profile'); // Redirect to profile or dashboard
     } else {
       toast({ title: "Login Failed", description: "Invalid email or password.", variant: "destructive" });
@@ -51,12 +57,12 @@ export default function LoginPage() {
     <div className="container flex items-center justify-center min-h-[calc(100vh-8rem)] py-12">
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="text-center">
-          <LogIn className="mx-auto h-12 w-12 text-primary mb-4" />
-          <CardTitle className="text-3xl font-bold">Welcome Back!</CardTitle>
-          <CardDescription>Log in to your Calendar of Camps account to continue.</CardDescription>
+          <LogIn className="mx-auto h-10 w-10 text-primary mb-3" />
+          <CardTitle className="text-2xl font-bold">Login</CardTitle>
+          <CardDescription>Access your Calendar of Camps account.</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <div className="relative">
@@ -73,12 +79,7 @@ export default function LoginPage() {
               </div>
             </div>
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
-                <Link href="/forgot-password" passHref>
-                  <Button variant="link" size="sm" className="p-0 h-auto text-xs">Forgot password?</Button>
-                </Link>
-              </div>
+              <Label htmlFor="password">Password</Label>
               <div className="relative">
                 <Key className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input
@@ -92,15 +93,48 @@ export default function LoginPage() {
                 />
               </div>
             </div>
+            <div className="flex items-center justify-between pt-1">
+              <div className="flex items-center space-x-2">
+                <Checkbox id="remember-me" checked={rememberMe} onCheckedChange={(checked) => setRememberMe(!!checked)} />
+                <Label htmlFor="remember-me" className="text-sm font-normal text-muted-foreground">
+                  Remember me
+                </Label>
+              </div>
+              <Link href="/forgot-password" passHref>
+                <Button variant="link" size="sm" className="p-0 h-auto text-xs">Forgot password?</Button>
+              </Link>
+            </div>
           </CardContent>
-          <CardFooter className="flex flex-col gap-4">
+          <CardFooter className="flex flex-col gap-4 pt-2">
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Log In'}
             </Button>
-            <p className="text-sm text-center text-muted-foreground">
-              Don&apos;t have an account?{' '}
+
+            <div className="relative w-full my-1">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">
+                  Or sign in with
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+              <Button variant="outline" className="w-full" onClick={() => toast({title: "Social Login", description: "Google login clicked (not implemented)."})}>
+                {/* In a real app, use SVG icons for brands */}
+                Google
+              </Button>
+              <Button variant="outline" className="w-full" onClick={() => toast({title: "Social Login", description: "Facebook login clicked (not implemented)."})}>
+                Facebook
+              </Button>
+            </div>
+            
+            <p className="mt-2 text-sm text-center text-muted-foreground">
+              New user?{' '}
               <Link href="/signup" className="font-medium text-primary hover:underline">
-                Sign up
+                Sign up for an account
               </Link>
             </p>
           </CardFooter>
