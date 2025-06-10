@@ -99,9 +99,9 @@ export default function SubmitCampPage() {
     return (
       <div className="container py-12 md:py-16">
          <div className="text-center mb-10">
-            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">List Your Camp for Free!</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Reach thousands of parents and fill your camp sessions by listing on Calendar of Camps.
+            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">Help Families Discover Great Camps</h1>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                Whether you’re a camp organizer or a parent in the know, adding a camp to Calendar of Camps helps others find trusted, local options for their kids. Small, community-based camps often fly under the radar—your submission helps surface the hidden gems that families might otherwise miss. Not only are listings are FREE and easy to add, you unlock discounts for adding new camps. Together we’re building a resource that makes summer planning simpler for everyone.
             </p>
         </div>
         <Card className="max-w-md mx-auto p-6 md:p-8 bg-card shadow-xl">
@@ -123,9 +123,9 @@ export default function SubmitCampPage() {
   return (
     <div className="container py-12 md:py-16">
       <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">List Your Camp for Free & Reach Thousands!</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-4">Help Families Discover Great Camps</h1>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-          Showcase your camp to engaged parents, fill your spots, and enjoy free marketing. It's easy and rewarding!
+          Whether you’re a camp organizer or a parent in the know, adding a camp to Calendar of Camps helps others find trusted, local options for their kids. Small, community-based camps often fly under the radar—your submission helps surface the hidden gems that families might otherwise miss. Not only are listings are FREE and easy to add, you unlock discounts for adding new camps.  ogether we’re building a resource that makes summer planning simpler for everyone.
         </p>
       </div>
 
@@ -356,3 +356,5 @@ export default function SubmitCampPage() {
   );
 }
 
+
+    
