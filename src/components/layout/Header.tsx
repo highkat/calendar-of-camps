@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react'; // Added React for FormEvent
-import { Menu, X, UserCircle, LogOut, LogIn, Search } from 'lucide-react'; // Removed UserPlus
+import { Menu, X, UserCircle, LogOut, LogIn, Search } from 'lucide-react';
 import Logo from '@/components/shared/Logo';
 import { NAV_LINKS } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
@@ -48,7 +48,6 @@ export default function Header() {
               Login
             </Link>
           </Button>
-          {/* Sign Up button removed */}
         </>
       );
     }
@@ -78,7 +77,6 @@ export default function Header() {
             Login
           </Link>
         </Button>
-        {/* Sign Up button removed */}
       </>
     );
   };
@@ -95,7 +93,6 @@ export default function Header() {
                 </Link>
             </Button>
           </SheetClose>
-          {/* Sign Up button removed */}
         </div>
       );
     }
@@ -125,7 +122,6 @@ export default function Header() {
                 </Link>
             </Button>
           </SheetClose>
-          {/* Sign Up button removed */}
         </div>
     );
   };
@@ -137,7 +133,13 @@ export default function Header() {
         <nav className="hidden md:flex items-center space-x-4 ml-6">
           {NAV_LINKS.map((link) => (
             <Link key={link.label} href={link.href} className={`${commonLinkClasses}`}>
-               {link.label}
+               {link.label === "Submit a Camp" ? (
+                <>
+                  Submit a <span className="relative ml-1">Camp</span>
+                </>
+              ) : (
+                link.label
+              )}
             </Link>
           ))}
         </nav>
@@ -146,11 +148,10 @@ export default function Header() {
           {authLoading ? (
             <div className="flex items-center space-x-2">
               <div className="h-9 w-20 rounded-md bg-muted animate-pulse"></div>
-              {/* Skeleton for Sign Up button removed */}
             </div>
           ) : (
             <>
-            <form onSubmit={handleSearchSubmit} className="flex items-center max-w-xs mr-4">
+            <form onSubmit={handleSearchSubmit} className="flex items-center max-w-48 mr-4">
                 <Input
                 type="search"
                 placeholder="Search camps..."
@@ -208,7 +209,13 @@ export default function Header() {
                   {NAV_LINKS.map((link) => (
                     <SheetClose asChild key={link.label}>
                       <Link href={link.href} className={`${mobileLinkClasses}`}>
-                        {link.label}
+                        {link.label === "Submit a Camp" ? (
+                            <>
+                            Submit a <span className="relative ml-1">Camp</span>
+                            </>
+                        ) : (
+                            link.label
+                        )}
                       </Link>
                     </SheetClose>
                   ))}
