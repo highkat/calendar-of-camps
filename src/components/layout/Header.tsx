@@ -11,7 +11,6 @@ import { Input } from '@/components/ui/input'; // Added Input
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import { Badge } from '@/components/ui/badge';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -160,42 +159,36 @@ export default function Header() {
         <nav className="hidden md:flex items-center space-x-4 ml-6">
           {NAV_LINKS.map((link) => (
             <Link key={link.label} href={link.href} className={`${commonLinkClasses}`}>
-              {link.label === "Submit a Camp" ? (
-                <>
-                  Submit a&nbsp;
-                  <span className="relative">
-                    Camp
-                    <Badge
-                      variant="accent_compact"
-                      className="absolute top-0 left-full ml-0.5 -translate-y-[45%]"
-                    >
-                      Free
-                    </Badge>
-                  </span>
-                </>
-              ) : (
-                link.label
-              )}
+              {link.label}
             </Link>
           ))}
         </nav>
 
         <div className="hidden md:flex flex-grow items-center justify-end space-x-2">
-          <form onSubmit={handleSearchSubmit} className="flex items-center max-w-xs mr-4">
-            <Input
-              type="search"
-              placeholder="Search camps..."
-              className="h-9 text-sm rounded-r-none focus-visible:ring-offset-0 focus-visible:ring-1"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              aria-label="Search camps"
-            />
-            <Button type="submit" size="icon" variant="ghost" className="h-9 w-9 rounded-l-none border border-l-0 border-input hover:bg-accent">
-              <Search className="h-4 w-4" />
-              <span className="sr-only">Search</span>
-            </Button>
-          </form>
-          {renderAuthButtons()}
+          {authLoading ? (
+            <div className="flex items-center space-x-2">
+              <div className="h-9 w-20 rounded-md bg-muted animate-pulse"></div>
+              <div className="h-9 w-24 rounded-md bg-muted animate-pulse"></div>
+            </div>
+          ) : (
+            <>
+            <form onSubmit={handleSearchSubmit} className="flex items-center max-w-xs mr-4">
+                <Input
+                type="search"
+                placeholder="Search camps..."
+                className="h-9 text-sm rounded-r-none focus-visible:ring-offset-0 focus-visible:ring-1"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                aria-label="Search camps"
+                />
+                <Button type="submit" size="icon" variant="ghost" className="h-9 w-9 rounded-l-none border border-l-0 border-input hover:bg-accent">
+                <Search className="h-4 w-4" />
+                <span className="sr-only">Search</span>
+                </Button>
+            </form>
+            {renderAuthButtons()}
+            </>
+          )}
         </div>
 
         <div className="md:hidden flex-grow flex justify-end">
@@ -221,22 +214,7 @@ export default function Header() {
                   {NAV_LINKS.map((link) => (
                     <SheetClose asChild key={link.label}>
                       <Link href={link.href} className={`${mobileLinkClasses}`}>
-                        {link.label === "Submit a Camp" ? (
-                          <>
-                            Submit a&nbsp;
-                            <span className="relative">
-                              Camp
-                              <Badge
-                                variant="accent_compact"
-                                className="absolute top-0 left-full ml-0.5 -translate-y-[45%]"
-                              >
-                                Free
-                              </Badge>
-                            </span>
-                          </>
-                        ) : (
-                          link.label
-                        )}
+                        {link.label}
                       </Link>
                     </SheetClose>
                   ))}
