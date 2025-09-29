@@ -1,4 +1,4 @@
-# **App Name**: CampCompass
+# **App Name**: Calendar of Camps
 
 ## Core Features:
 
